@@ -3,6 +3,10 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
 	public float aSpeed = 6f;
+	public float turnSmoothing = 15f;
+	public float speedDamp = 0.1f;
+	public AudioClip walkClip;
+
 
 	Vector3 aMovement;
 	Animator aAnim;
@@ -12,7 +16,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	void Awake()
 	{
-		floorMask = LayerMask.GetMask ("Floor");
+		floorMask = LayerMask.GetMask ("Ground");
 		aAnim = GetComponent<Animator> ();
 		aPlayerBody = GetComponent<Rigidbody> ();
 	}
@@ -31,13 +35,14 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		aMovement.Set (pHoriz, 0f, pVert);
 		aMovement = aMovement.normalized * aSpeed * Time.deltaTime;
-		aPlayerBody.MovePosition (transform.position);
+		aPlayerBody.MovePosition (transform.position + aMovement);
 	}
 
 	void Turn ()
 	{
 		Ray camRay = Camera.main.ScreenPointToRay (Input.mousePosition);
 		RaycastHit floorHit;
+
 		if(Physics.Raycast (camRay, out floorHit, camRayLength, floorMask))
 		{
 				Vector3 playerToMouse = floorHit.point - transform.position;
