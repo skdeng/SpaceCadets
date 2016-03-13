@@ -1,24 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//a concrete implementation of a tree growth under growthFunction interface for strategy pattern
 public class treeGrowth : MonoBehaviour, growthFunction {
 
-	void Start(){
+	public readonly float scaleLimit = 4F;
+	public readonly float scaleRate = 0.00001F;
 
-	}
 
-
-	// Update is called once per frame
-	void Update () {
-		Vector3 curSize = transform.localScale;
-		if (curSize.x <= 4) {
-			transform.localScale += new Vector3 (0.00001F, 0.00001F, 0.00001F);
-
+	public float getGrowth(Vector3 curScale){
+		if (curScale.x <= scaleLimit) {
+			curScale += new Vector3 (scaleRate, scaleRate, scaleRate);
 		}
 
-	}
 
-	public float getGrowth(float curAge){
-		return 0.1F;
 	}
 }

@@ -4,23 +4,21 @@ using System.Collections;
 public class TestHorse : Animal {
 
 	Animator anim;
-	int idleHash = Animator.StringToHash("Horse_Idle");
-	int idleWalk = Animator.StringToHash("Horse_Walk");
-	int idleRun = Animator.StringToHash("Horse_Run");
+
 	// Use this for initialization
 	void Start () {
+		//for change of state for animations
 		anim = GetComponent<Animator>();
 	}
 
 	// Update is called once per frame
 	void FixedUpdate () {
-		//anim.SetTrigger (idleWalk);
-		//anim.Play ("Allosaurus_Run");
+		//enables walking of the horse on the spot
 		anim.SetBool("IsWalking", true);
-
 
 	}
 
+	//placeholders for now
 	void move(){
 	}
 
