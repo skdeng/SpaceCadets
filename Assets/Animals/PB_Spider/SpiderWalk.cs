@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SpiderWalk : MonoBehaviour {
+public class SpiderWalk : Animal {
 
 
 	Animator anim;
@@ -20,5 +20,11 @@ public class SpiderWalk : MonoBehaviour {
 		//anim.SetBool("IsWalking", true);
 		anim.SetTrigger (die);
 
+	}
+
+	void move(){
+	}
+
+	void hit(){
 	}
 }

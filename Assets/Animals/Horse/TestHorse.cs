@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TestHorse : MonoBehaviour {
+public class TestHorse : Animal {
 
 	Animator anim;
 	int idleHash = Animator.StringToHash("Horse_Idle");
@@ -19,5 +19,11 @@ public class TestHorse : MonoBehaviour {
 		anim.SetBool("IsWalking", true);
 
 
+	}
+
+	void move(){
+	}
+
+	void hit(){
 	}
 }

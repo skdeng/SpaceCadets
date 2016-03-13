@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RabbitDie : MonoBehaviour {
+public class RabbitDie : Animal {
 
 	Animator anim;
 	//int idleHash = Animator.StringToHash("idle");
@@ -19,5 +19,11 @@ public class RabbitDie : MonoBehaviour {
 		anim.SetTrigger(die);
 
 
+	}
+
+	void move(){
+	}
+
+	void hit(){
 	}
 }

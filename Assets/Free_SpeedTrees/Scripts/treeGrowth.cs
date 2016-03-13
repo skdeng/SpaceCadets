@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class treeGrowth : MonoBehaviour {
+public class treeGrowth : MonoBehaviour, growthFunction {
 
 	void Start(){
 
@@ -16,5 +16,9 @@ public class treeGrowth : MonoBehaviour {
 
 		}
 
+	}
+
+	public float getGrowth(float curAge){
+		return 0.1F;
 	}
 }
