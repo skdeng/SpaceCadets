@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(CharacterController))]
 public class FirstPersonController : MonoBehaviour {
 
 	//class fields
@@ -10,19 +11,17 @@ public class FirstPersonController : MonoBehaviour {
 	public float jumpSpeed = 20.0f;
 	float pitchRotation = 0;
 	float vertVelocity = 0;
+	CharacterController characterController;
 
 
 	// Use this for initialization
 	void Start () {
 		Screen.lockCursor = true;
+		characterController = GetComponent<CharacterController> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
-		//output
-		CharacterController cc = GetComponent<CharacterController> ();
-
 
 		//controlling player view
 		float rotateYaw = Input.GetAxis ("Mouse X") * mouseSensitivity;
@@ -36,7 +35,7 @@ public class FirstPersonController : MonoBehaviour {
 		float forwardSpeed = Input.GetAxis("Vertical")* moveSpeed;
 
 		//jumping
-		if(cc.isGrounded && Input.GetButtonDown("Jump")){
+		if(characterController.isGrounded && Input.GetButtonDown("Jump")){
 			vertVelocity = jumpSpeed;
 		}
 
@@ -46,6 +45,6 @@ public class FirstPersonController : MonoBehaviour {
 		aMovement = transform.rotation * aMovement;
 		
 
-		cc.Move(aMovement * Time.deltaTime);
+		characterController.Move(aMovement * Time.deltaTime);
 	}
 }
