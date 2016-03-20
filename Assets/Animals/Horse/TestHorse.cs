@@ -19,9 +19,9 @@ public class TestHorse : Animal {
 	}
 
 	//placeholders for now
-	void move(){
+	override public void move(){
 	}
 
-	void hit(){
+	override public void hit(){
 	}
 }

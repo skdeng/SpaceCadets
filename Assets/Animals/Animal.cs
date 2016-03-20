@@ -11,6 +11,6 @@ public abstract class Animal : Lifeform {
 	public float strength;
 
 	//common to animals
-	abstract void move ();
-	abstract void hit(/*Player here*/);
+	public abstract void move ();
+	public abstract void hit(/*Player here*/);
 }

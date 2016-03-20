@@ -2,8 +2,8 @@
 using System.Collections;
 
 //the interface for growthfunction strategy
-interface growthFunction {
+public interface growthFunction {
 	//method common to the strategies
-	float getGrowth (Vector3 curScale);
+	Vector3 getGrowth (Vector3 curScale);
 
 }

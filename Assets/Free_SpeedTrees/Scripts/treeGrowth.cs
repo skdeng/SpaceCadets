@@ -8,10 +8,12 @@ public class treeGrowth : MonoBehaviour, growthFunction {
 	public readonly float scaleRate = 0.00001F;
 
 
-	public float getGrowth(Vector3 curScale){
+	public Vector3 getGrowth(Vector3 curScale){
 		if (curScale.x <= scaleLimit) {
 			curScale += new Vector3 (scaleRate, scaleRate, scaleRate);
 		}
+
+		return curScale;
 
 
 	}

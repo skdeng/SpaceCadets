@@ -21,9 +21,9 @@ public class RabbitDie : Animal {
 
 	}
 
-	void move(){
+	override public void move(){
 	}
 
-	void hit(){
+	override public void hit(){
 	}
 }

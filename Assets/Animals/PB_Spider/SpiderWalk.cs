@@ -22,9 +22,10 @@ public class SpiderWalk : Animal {
 
 	}
 
-	void move(){
+
+	override public void move(){
 	}
 
-	void hit(){
+	override public void hit(){
 	}
 }

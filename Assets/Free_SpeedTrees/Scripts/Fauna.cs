@@ -5,11 +5,12 @@ public abstract class Fauna : Lifeform {
 	//may not be abstract?... we will see in time
 	//protected for private access and inheritance
 	protected growthFunction growth;
+	protected Vector3 curScale;
 
 
 	//called by something executing the strategy
 	public void grow(){
-		growth.getGrowth(Vector3 curScale);
+			curScale = growth.getGrowth(curScale);
 	}
 
 	//to change the growth strategy
