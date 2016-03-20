@@ -5,8 +5,14 @@ using System.Collections;
 public class RabbitActionController : MonoBehaviour {
 	
 
-	private Animator animator;
+	private Animator animator, animatorFight;
 	private CharacterController controller;
+	private GameObject imageFist;
+
+	public bool clicked = false;
+
+	private int hashFight = Animator.StringToHash("punch");
+	private int hashFightIdle = Animator.StringToHash("idle");
 
 	private int hashHit = Animator.StringToHash("Base Layer.Hit");
 	private int hashDead = Animator.StringToHash("Base Layer.Dead");
@@ -17,11 +23,16 @@ public class RabbitActionController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		
 		animator = GetComponent<Animator>();
 		controller = GetComponent<CharacterController>();
+
+		imageFist = GameObject.FindGameObjectWithTag ("Punch");
+		animatorFight = imageFist.GetComponent<Animator>();
+
 	}
 
-	void OnGUI()
+	/*void OnGUI()
 	{
 		if (GUI.Button(new Rect(10, 10, 150, 40), "Punch"))
 		{
@@ -64,6 +75,24 @@ public class RabbitActionController : MonoBehaviour {
 		animator.SetFloat("Speed", move ? 1.0f : 0.0f);
 
 
+	}
+*/
+
+	public void OnMouseDown() {
+		Camera camera = Camera.main;
+		float dist;
+
+
+		dist = Vector3.Distance (transform.position, camera.transform.position);
+
+		if (dist <= 3) {
+			clicked = !clicked;
+
+			animatorFight.Play (hashFight);
+			animator.Play (hashHit);
+
+			//animatorFight.Play (hashFightIdle);
+		}
 	}
 
 	void OnAnimatorMove() {
