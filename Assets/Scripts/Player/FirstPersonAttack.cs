@@ -27,7 +27,7 @@ public class FirstPersonAttack : MonoBehaviour {
 			if(Physics.Raycast(ray, out hitInfo, fRange)){
 				Vector3 hitPoint = hitInfo.point;
 
-				Debug.Log ("Hit Point:" + hitPoint);
+			//Debug.Log ("Hit Point:" + hitPoint);
 
 				if(gDebrisPrefab != null) {
 					Instantiate (gDebrisPrefab, hitPoint, Quaternion.identity);
