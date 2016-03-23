@@ -4,7 +4,7 @@ using System.Collections;
 public class FirstPersonShooting : MonoBehaviour {
 
 	//Our projectile
-	public GameObject Plasma_prefab;
+	public GameObject gPlasma_prefab;
 	private float fProjectileForce = 100f;
 
 	// Use this for initialization
@@ -16,7 +16,9 @@ public class FirstPersonShooting : MonoBehaviour {
 	void Update () {
 		if (Input.GetButtonDown ("Fire")) {
 			Camera gameCamera = Camera.main;
-			GameObject projectile = (GameObject)Instantiate(Plasma_prefab, gameCamera.transform.position + gameCamera.transform.forward, gameCamera.transform.rotation);
+
+			//Instantiate the projectile and impart force onto it
+			GameObject projectile = (GameObject)Instantiate(gPlasma_prefab, gameCamera.transform.position + gameCamera.transform.forward, gameCamera.transform.rotation);
 			projectile.GetComponent<Rigidbody>().GetComponent<Rigidbody>().AddForce(gameCamera.transform.forward * fProjectileForce, ForceMode.Impulse);
 		}		
 	}

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//class for simple first person movement
+
 [RequireComponent(typeof(CharacterController))]
 public class FirstPersonController : MonoBehaviour {
 
