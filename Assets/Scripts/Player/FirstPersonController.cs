@@ -1,28 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(CharacterController))]
 public class FirstPersonController : MonoBehaviour {
 
 	//class fields
-	public float moveSpeed = 10.0f;
+	float moveSpeed = 10.0f;
 	public float mouseSensitivity = 5.0f;
-	public float pitchRange = 60.0f;
 	public float jumpSpeed = 20.0f;
-	float pitchRotation = 0;
-	float vertVelocity = 0;
+
+	private float pitchRange = 60.0f;
+	private float pitchRotation = 0;
+	private float vertVelocity = 0;
+	private float sideSpeed = 0.0f;
+	private float forwardSpeed = 0.0f;
+	CharacterController characterController;
 
 
 	// Use this for initialization
 	void Start () {
 		Screen.lockCursor = true;
+		characterController = GetComponent<CharacterController> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
-		//output
-		CharacterController cc = GetComponent<CharacterController> ();
-
 
 		//controlling player view
 		float rotateYaw = Input.GetAxis ("Mouse X") * mouseSensitivity;
@@ -32,12 +34,25 @@ public class FirstPersonController : MonoBehaviour {
 		Camera.main.transform.localRotation = Quaternion.Euler (pitchRotation, 0, 0);
 
 		//user movement
-		float sideSpeed = Input.GetAxis ("Horizontal")* moveSpeed;
-		float forwardSpeed = Input.GetAxis("Vertical")* moveSpeed;
+		if(Input.GetButton("Sprint")){
+		sideSpeed = Input.GetAxis ("Horizontal")* moveSpeed * 1.5f;
+		forwardSpeed = Input.GetAxis("Vertical")* moveSpeed * 1.5f;
+		} 
+		else{
+			sideSpeed = Input.GetAxis ("Horizontal")* moveSpeed;
+			forwardSpeed = Input.GetAxis("Vertical")* moveSpeed;	
+		} 
 
 		//jumping
-		if(cc.isGrounded && Input.GetButtonDown("Jump")){
+		if(characterController.isGrounded && Input.GetButtonDown("Jump")){
 			vertVelocity = jumpSpeed;
+		}
+
+		//crouching
+		if (characterController.isGrounded && Input.GetButton ("Crouch")) {
+			characterController.height = 1;
+		} else {
+			characterController.height = 2;
 		}
 
 		//speed and gravity
@@ -46,6 +61,6 @@ public class FirstPersonController : MonoBehaviour {
 		aMovement = transform.rotation * aMovement;
 		
 
-		cc.Move(aMovement * Time.deltaTime);
+		characterController.Move(aMovement * Time.deltaTime);
 	}
 }
