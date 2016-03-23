@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 201b33ae28eb841c99b3b7f80a6a944d
+timeCreated: 1458759414
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - gFlare: {fileID: 161368, guid: 978bdd5a9040d448fba6a893ee635a00, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

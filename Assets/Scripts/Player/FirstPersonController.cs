@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//class for simple first person movement
+
 [RequireComponent(typeof(CharacterController))]
 public class FirstPersonController : MonoBehaviour {
 
 	//class fields
-	float moveSpeed = 10.0f;
-	public float mouseSensitivity = 5.0f;
-	public float jumpSpeed = 20.0f;
+	public float fMoveSpeed = 10.0f;
+	public int iStamina = 10; 
+	public float fMouseSensitivity = 5.0f;
+	public float fJumpSpeed = 5.0f;
 
 	private float pitchRange = 60.0f;
 	private float pitchRotation = 0;
@@ -27,25 +30,28 @@ public class FirstPersonController : MonoBehaviour {
 	void Update () {
 
 		//controlling player view
-		float rotateYaw = Input.GetAxis ("Mouse X") * mouseSensitivity;
+		float rotateYaw = Input.GetAxis ("Mouse X") * fMouseSensitivity;
 		transform.Rotate (0, rotateYaw, 0);
-		pitchRotation -= Input.GetAxis ("Mouse Y") * mouseSensitivity;
+		pitchRotation -= Input.GetAxis ("Mouse Y") * fMouseSensitivity;
 		pitchRotation = Mathf.Clamp (pitchRotation, -pitchRange, pitchRange);
 		Camera.main.transform.localRotation = Quaternion.Euler (pitchRotation, 0, 0);
 
 		//user movement
-		if(Input.GetButton("Sprint")){
-		sideSpeed = Input.GetAxis ("Horizontal")* moveSpeed * 1.5f;
-		forwardSpeed = Input.GetAxis("Vertical")* moveSpeed * 1.5f;
-		} 
-		else{
-			sideSpeed = Input.GetAxis ("Horizontal")* moveSpeed;
-			forwardSpeed = Input.GetAxis("Vertical")* moveSpeed;	
-		} 
+		if (Input.GetButton ("Sprint") && iStamina != 0) {
+			sideSpeed = Input.GetAxis ("Horizontal") * fMoveSpeed * 1.5f;
+			forwardSpeed = Input.GetAxis ("Vertical") * fMoveSpeed * 1.5f;
+			iStamina--;
+		} else {
+			sideSpeed = Input.GetAxis ("Horizontal") * fMoveSpeed;
+			forwardSpeed = Input.GetAxis ("Vertical") * fMoveSpeed;
+			if (iStamina < 10) {
+				iStamina++;
+			}
+		}
 
 		//jumping
 		if(characterController.isGrounded && Input.GetButtonDown("Jump")){
-			vertVelocity = jumpSpeed;
+			vertVelocity = fJumpSpeed;
 		}
 
 		//crouching

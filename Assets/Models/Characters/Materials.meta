@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 fileFormatVersion: 2
 guid: 170467b9b43fdcd41912cd14ede2392a
 folderAsset: yes
@@ -7,3 +8,15 @@ DefaultImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+||||||| merged common ancestors
+=======
+fileFormatVersion: 2
+guid: fffa5c5165adc47b082a5a1aed65901e
+folderAsset: yes
+timeCreated: 1458762897
+licenseType: Free
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+>>>>>>> refs/remotes/origin/Joe_Character
