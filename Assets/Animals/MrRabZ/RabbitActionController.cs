@@ -81,9 +81,7 @@ public class RabbitActionController : MonoBehaviour {
 	public void OnMouseDown() {
 		Camera camera = Camera.main;
 		float dist;
-		ScriptName sn = gameObject.GetComponent<ScriptName>()
-			
-
+		ScriptName sn = gameObject.GetComponent<ScriptName> ();
 
 		dist = Vector3.Distance (transform.position, camera.transform.position);
 
@@ -98,7 +96,6 @@ public class RabbitActionController : MonoBehaviour {
 	}
 
 	void OnAnimatorMove() {
-
 
 	}
 }
