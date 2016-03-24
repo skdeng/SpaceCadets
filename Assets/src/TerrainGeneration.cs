@@ -73,7 +73,7 @@ public class TerrainGeneration : MonoBehaviour {
 		}
 			
 		//adjust and renormalize the final height to [0,1]
-		float adjust = (Seed % 5) / 10.0f + 0.1f;
+		float adjust = (Seed % 3) / 10.0f + 0.1f;
 		for (int y = 0; y < Height; y++) {
 			for (int x = 0; x < Width; x++) {
 				heightMap [x + y * Width] = adjust * (heightMap [x + y * Width] + 1) / 2;
