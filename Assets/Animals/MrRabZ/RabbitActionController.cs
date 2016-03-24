@@ -81,13 +81,13 @@ public class RabbitActionController : MonoBehaviour {
 	public void OnMouseDown() {
 		Camera camera = Camera.main;
 		float dist;
-		ScriptName sn = gameObject.GetComponent<ScriptName> ();
+		//ScriptName sn = gameObject.GetComponent<ScriptName> ();
 
 		dist = Vector3.Distance (transform.position, camera.transform.position);
 
 		if (dist <= 3) {
 			clicked = !clicked;
-			sn.hitSomething();
+			//sn.hitSomething();
 
 			animator.Play (hashHit);
 
