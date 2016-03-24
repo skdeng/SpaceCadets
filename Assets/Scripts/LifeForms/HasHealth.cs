@@ -18,6 +18,11 @@ public class HasHealth : MonoBehaviour {
 		fHP += pAmount;
 	}
 
+	public float GetHealth ()
+	{
+		return fHP;
+	}
+
 	void Die() 
 	{
 		Destroy(gameObject);

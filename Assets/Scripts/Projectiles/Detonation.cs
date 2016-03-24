@@ -29,7 +29,7 @@ public class Detonation : MonoBehaviour {
 		GameObject target = collision.gameObject;
 		Instantiate (gFlare, transform.position, Quaternion.identity);
 		Destroy (gameObject);
-		if (target.tag == "Enemy" || 1 == 1) 
+		if (target.tag == "Enemy") 
 		{
 			HasHealth aHealth = target.GetComponent<HasHealth>();
 			aHealth.ReceiveDamage (fDamage);

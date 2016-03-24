@@ -5,14 +5,17 @@ using System.Collections;
 
 public class FirstPersonShooting : MonoBehaviour {
 
-	//Our projectile
-	public GameObject gPlasma_prefab;
+	//Our projectile (Defaults to plasma)
+	public GameObject gProjectile;
 
 	private float fProjectileForce = 100f;
 
 	// Use this for initialization
 	void Start () {
-	
+	}
+
+	public void setProjectile(GameObject pProjectile){
+		gProjectile = pProjectile;
 	}
 	
 	// Update is called once per frame
@@ -22,8 +25,8 @@ public class FirstPersonShooting : MonoBehaviour {
 			Camera gameCamera = Camera.main;
 
 			//Instantiate the projectile and impart force onto it
-			GameObject projectile = (GameObject)Instantiate(gPlasma_prefab, gameCamera.transform.position + gameCamera.transform.forward, gameCamera.transform.rotation);
-			projectile.GetComponent<Rigidbody>().GetComponent<Rigidbody>().AddForce(gameCamera.transform.forward * fProjectileForce, ForceMode.Impulse);
+			GameObject aProjectile = (GameObject)Instantiate(gProjectile, gameCamera.transform.position + gameCamera.transform.forward, gameCamera.transform.rotation);
+			aProjectile.GetComponent<Rigidbody>().GetComponent<Rigidbody>().AddForce(gameCamera.transform.forward * fProjectileForce, ForceMode.Impulse);
 		}
 			
 	}
