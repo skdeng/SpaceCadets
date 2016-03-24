@@ -3,7 +3,7 @@ using System.Collections;
 
 public class HasHealth : MonoBehaviour {
 
-	private float fHP = 100f;
+	protected float fHP = 100f;
 
 	public void ReceiveDamage( float pAmount )
 	{

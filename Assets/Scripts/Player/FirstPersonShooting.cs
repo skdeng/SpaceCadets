@@ -23,9 +23,10 @@ public class FirstPersonShooting : MonoBehaviour {
 		
 		if (Input.GetButtonDown ("Fire")) {
 			Camera gameCamera = Camera.main;
+			Transform Weapon = gameCamera.transform.GetChild(0);
 
 			//Instantiate the projectile and impart force onto it
-			GameObject aProjectile = (GameObject)Instantiate(gProjectile, gameCamera.transform.position + gameCamera.transform.forward, gameCamera.transform.rotation);
+			GameObject aProjectile = (GameObject)Instantiate(gProjectile, Weapon.position, gameCamera.transform.rotation);
 			aProjectile.GetComponent<Rigidbody>().GetComponent<Rigidbody>().AddForce(gameCamera.transform.forward * fProjectileForce, ForceMode.Impulse);
 		}
 			
