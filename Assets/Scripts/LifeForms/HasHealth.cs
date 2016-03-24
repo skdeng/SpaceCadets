@@ -3,7 +3,7 @@ using System.Collections;
 
 public class HasHealth : MonoBehaviour {
 
-	public float fHP = 100f;
+	private float fHP = 100f;
 
 	public void ReceiveDamage( float pAmount )
 	{
@@ -11,6 +11,11 @@ public class HasHealth : MonoBehaviour {
 		if (fHP <= 0) {
 			Die ();
 		}
+	}
+		
+	public void BuffHealth (float pAmount)
+	{
+		fHP += pAmount;
 	}
 
 	void Die() 
