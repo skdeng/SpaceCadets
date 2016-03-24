@@ -81,14 +81,14 @@ public class RabbitActionController : MonoBehaviour {
 	public void OnMouseDown() {
 		Camera camera = Camera.main;
 		float dist;
-
+		//ScriptName sn = gameObject.GetComponent<ScriptName> ();
 
 		dist = Vector3.Distance (transform.position, camera.transform.position);
 
 		if (dist <= 3) {
 			clicked = !clicked;
+			//sn.hitSomething();
 
-			animatorFight.Play (hashFight);
 			animator.Play (hashHit);
 
 			//animatorFight.Play (hashFightIdle);
@@ -96,7 +96,6 @@ public class RabbitActionController : MonoBehaviour {
 	}
 
 	void OnAnimatorMove() {
-
 
 	}
 }
