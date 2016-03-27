@@ -10,13 +10,22 @@ public abstract class Animal : Lifeform {
 	public float speed = 0.1f;
 	public float strength;
 
-    public float fIdletime = 3;
-    public float fWalkingTime = 2;
+    protected float fIdletime = 3;
+    protected float fWalkingTime = 2;
 
     protected float fLasttime = 0;
     protected bool bStartMoving = false;
     protected bool bMoving = false;
     protected Vector3 moveVector;
+
+
+    public Terrain terrain;
+
+    protected Animal() {
+        System.Random r = new System.Random();
+        fIdletime = ((float)r.NextDouble() + 1) * 3;
+        fWalkingTime = ((float)r.NextDouble() + 1) * 3;
+    }
 
 	//common to animals
 	public abstract void move ();
@@ -40,7 +49,11 @@ public abstract class Animal : Lifeform {
     }
 
     protected void goForward() {
+        Vector3 pos = transform.position;
         transform.Translate(new Vector3(0, 0, speed));
+        Vector3 pos2 = transform.position;
+        float deltaheight = terrain.SampleHeight(pos2) - terrain.SampleHeight(pos);
+        transform.Translate(new Vector3(0, deltaheight, 0));
     }
 
     protected void startWalking(Animator anim) {

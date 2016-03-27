@@ -10,8 +10,15 @@ public class Spider : Animal {
 	int die = Animator.StringToHash("dead");
 
 	void Start () {
+        float nX = Random.Range(-450, 450);
+        float nZ = Random.Range(-450, 450);
+        transform.Translate(new Vector3(nX, 0, nZ));
+
 		anim = GetComponent<Animator>();
         fLasttime = Time.time;
+        float curheight = transform.position.y;
+        float terheight = terrain.SampleHeight(transform.position);
+        transform.Translate(new Vector3(0, terheight - curheight, 0));
 	}
 
 	// Update is called once per frame

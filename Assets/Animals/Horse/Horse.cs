@@ -8,8 +8,16 @@ public class Horse : Animal {
 	// Use this for initialization
 	void Start () {
 		//for change of state for animations
+
+        float nX = Random.Range(-450, 450);
+        float nZ = Random.Range(-450, 450);
+        transform.Translate(new Vector3(nX, 0, nZ));
+
 		anim = GetComponent<Animator>();
         fLasttime = Time.time;
+        float curheight = transform.position.y;
+        float terheight = terrain.SampleHeight(transform.position);
+        transform.Translate(new Vector3(0, (terheight) - curheight, 0));
 	}
 
     void Update() {

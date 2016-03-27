@@ -19,11 +19,16 @@ public class FirstPersonController : MonoBehaviour {
 	private float forwardSpeed = 0.0f;
 	CharacterController characterController;
 
+    public Terrain terrain;
+
 
 	// Use this for initialization
 	void Start () {
 		Screen.lockCursor = true;
 		characterController = GetComponent<CharacterController> ();
+        float curheight = transform.position.y;
+        float terheight = terrain.SampleHeight(transform.position);
+        transform.Translate(new Vector3(0, terheight - curheight, 0));
 	}
 	
 	// Update is called once per frame
