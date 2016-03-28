@@ -31,15 +31,8 @@ public abstract class Animal : Lifeform {
 	public abstract void move ();
 	public abstract void hit(/*Player here*/);
 
-    protected Vector3 randomMove(Vector3 facing) {
-        float fTurnRate = 0.3f;
-        Vector3 up = new Vector3(0, 1, 0);
-        Vector3 left = Vector3.Cross(up, facing).normalized;
-        float fRandom = Random.Range(-1, 1);
-        left *= fTurnRate * fRandom;
-        return (facing + left).normalized;
-    }
-
+    //returns a random move vector
+    //return: a random unit vector on the x-z plane
     protected Vector3 randomMove() {
         float fX = Random.Range(-10, 10);
         float fZ = Random.Range(-10, 10);
@@ -48,6 +41,8 @@ public abstract class Animal : Lifeform {
         return v;
     }
 
+    //move the animal forward according to its speed
+    //adjust the animal's y-position according the height of the terrain
     protected void goForward() {
         Vector3 pos = transform.position;
         transform.Translate(new Vector3(0, 0, speed));
@@ -56,6 +51,8 @@ public abstract class Animal : Lifeform {
         transform.Translate(new Vector3(0, deltaheight, 0));
     }
 
+    //prepare the animal to start walking animation
+    //param: anim   - animator of the animal
     protected void startWalking(Animator anim) {
         if (anim.IsInTransition(0) && bStartMoving) {
             bMoving = true;
@@ -64,6 +61,9 @@ public abstract class Animal : Lifeform {
         }
     }
 
+
+    //prepare the animal for idle animation
+    //param: anim   - animator of the animal
     protected void stopWalking(Animator anim) {
         if (anim.IsInTransition(0)) {
             bMoving = false;

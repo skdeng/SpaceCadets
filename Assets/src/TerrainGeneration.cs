@@ -7,9 +7,9 @@ public class TerrainGeneration : MonoBehaviour {
 	//seed for the random number generator
 	public int Seed = 10000101;
 	//width of the heightmap
-	private int Width;
+	private int nWidth;
 	//length of the heightmap
-	private int Height;
+	private int nHeight;
 
 	//height map as an array of float, we could also use a 2d array
 	private float[] heightMap = null;
@@ -84,6 +84,8 @@ public class TerrainGeneration : MonoBehaviour {
 	}
 
 	//apply diamond square algorithm once
+    //param: nStep  - size of square or diamond
+    //       dScale - magnitude of the height change
 	private void diamondSquare(int nStep, float dScale) {
 		int nHalfStep = nStep / 2;
 
@@ -106,6 +108,10 @@ public class TerrainGeneration : MonoBehaviour {
 	}
 
 	//Apply square step once
+    //param: nX     - x position
+    //       nY     - y position
+    //       nSize  - size of the square
+    //       dVal   - value of the height change
 	private void sampleSquare(int nX, int nY, int nSize, float dVal) {
 		int nHalfSize = nSize / 2;
 
@@ -116,8 +122,12 @@ public class TerrainGeneration : MonoBehaviour {
 		setSample(nX, nY, (dA + dB + dC + dD) / 4.0f + dVal);
 	}
 
-	//Apply diamond step once
-	private void sampleDiamond(int nX, int nY, int nSize, float dVal) {
+    //Apply diamond step once
+    //param: nX     - x position
+    //       nY     - y position
+    //       nSize  - size of the diamond
+    //       dVal   - value of the height change
+    private void sampleDiamond(int nX, int nY, int nSize, float dVal) {
 		int nHalfSize = nSize / 2;
 
 		float dA = sample(nX - nHalfSize, nY);
@@ -128,6 +138,9 @@ public class TerrainGeneration : MonoBehaviour {
 	}
 
 	//Get the height at a given point
+    //param: nX - x position
+    //       nY - y position
+    //return: value of the height
 	public float sample(int nX, int nY) {
 		if (nX >= Width) nX = Width - 1;
 		if (nX < 0) nX = 0;
@@ -138,6 +151,9 @@ public class TerrainGeneration : MonoBehaviour {
 	}
 
 	//Set the height at a given point
+    //param: nX     - x position
+    //       nY     - y position
+    //       dVal   - value of the height
 	private void setSample(int nX, int nY, float dVal)	{
 		if (nX >= Width) nX = Width - 1;
 		if (nX < 0) nX = 0;
@@ -146,7 +162,7 @@ public class TerrainGeneration : MonoBehaviour {
 		heightMap[nX + nY * Width] = dVal;
 	}
 
-	//Returns a random number between -1 and 1
+	//Returns a random number between -1 and 1 using unity's random engine
 	private float randN() {
 		return (UnityEngine.Random.value * 2) - 1;
 	}
