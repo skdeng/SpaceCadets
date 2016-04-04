@@ -14,9 +14,24 @@ public class Pause : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown(KeyCode.Escape)) {
             bPaused = !bPaused;
-            
+
+            if (bPaused) {
+                Cursor.lockState = CursorLockMode.None;
+                AudioListener.pause = true;
+                Cursor.visible = true;
+                //bring up pause screen
+            } else {
+                Cursor.lockState = CursorLockMode.Locked;
+                AudioListener.pause = false;
+                Cursor.visible = false;
+                //dismiss pause screen
+            }
+
             Time.timeScale = 1 - Time.timeScale;
-            gameObject.GetComponent<FirstPersonController>().enabled = !gameObject.GetComponent<FirstPersonController>().enabled;
+            gameObject.GetComponent<FirstPersonController>().enabled = !bPaused;
+            gameObject.GetComponent<FirstPersonShooting>().enabled = !bPaused;
+            //gameObject.GetComponent<FirstPersonAttack>().enabled = !bPaused;
+            
         }
 	}
 }
