@@ -166,4 +166,8 @@ public class TerrainGeneration : MonoBehaviour {
 	private float randN() {
 		return (UnityEngine.Random.value * 2) - 1;
 	}
+
+	public float[] returnHeightMap (){
+		return heightMap;
+	}
 }
