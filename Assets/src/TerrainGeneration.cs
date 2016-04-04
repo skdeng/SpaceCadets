@@ -7,9 +7,9 @@ public class TerrainGeneration : MonoBehaviour {
 	//seed for the random number generator
 	public int Seed = 10000101;
 	//width of the heightmap
-	private int nWidth;
+	private int Width;
 	//length of the heightmap
-	private int nHeight;
+	private int Height;
 
 	//height map as an array of float, we could also use a 2d array
 	private float[] heightMap = null;
