@@ -46,6 +46,9 @@ public abstract class Animal : Lifeform {
     protected void goForward() {
         Vector3 pos = transform.position;
         transform.Translate(new Vector3(0, 0, speed));
+
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, -450, 450), 0, Mathf.Clamp(transform.position.z, -450, 450));
+        
         Vector3 pos2 = transform.position;
         float deltaheight = terrain.SampleHeight(pos2) - terrain.SampleHeight(pos);
         transform.Translate(new Vector3(0, deltaheight, 0));
