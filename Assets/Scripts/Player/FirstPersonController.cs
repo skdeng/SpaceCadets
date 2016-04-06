@@ -12,6 +12,7 @@ public class FirstPersonController : MonoBehaviour {
 	public float fMouseSensitivity = 5.0f;
 	public float fJumpSpeed = 5.0f;
 
+	public GameObject[] aItems;
 	private float pitchRange = 60.0f;
 	private float pitchRotation = 0;
 	private float vertVelocity = 0;
