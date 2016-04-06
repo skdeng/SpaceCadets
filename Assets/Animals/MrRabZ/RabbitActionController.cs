@@ -7,9 +7,10 @@ public class RabbitActionController : MonoBehaviour {
 
 	private Animator animator, animatorFight;
 	private CharacterController controller;
-	private GameObject imageFist;
+	private FightBehaviour fb;
 
 	public bool clicked = false;
+	public FirstPersonShooting fps;
 
 	private int hashFight = Animator.StringToHash("punch");
 	private int hashFightIdle = Animator.StringToHash("idle");
@@ -26,9 +27,9 @@ public class RabbitActionController : MonoBehaviour {
 		
 		animator = GetComponent<Animator>();
 		controller = GetComponent<CharacterController>();
-
-		imageFist = GameObject.FindGameObjectWithTag ("Punch");
-		animatorFight = imageFist.GetComponent<Animator>();
+//		fb = 
+		fb = GameObject.FindGameObjectWithTag ("Player").GetComponent<FightBehaviour>();
+		//animatorFight = imageFist.GetComponent<Animator>();
 
 	}
 
@@ -86,13 +87,15 @@ public class RabbitActionController : MonoBehaviour {
 		dist = Vector3.Distance (transform.position, camera.transform.position);
 
 		if (dist <= 3) {
+			
 			clicked = !clicked;
-			//sn.hitSomething();
+			fb.hitSomething();
 
 			animator.Play (hashHit);
 
 			//animatorFight.Play (hashFightIdle);
 		}
+
 	}
 
 	void OnAnimatorMove() {

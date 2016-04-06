@@ -3,17 +3,17 @@ using System.Collections;
 
 public class fistPunch : MonoBehaviour {
 
-	/*private Animator animator;
-	private CharacterController controller;
-	public bool clicked = false;
+	private Animator animator;
 
-	private int hashPunch = Animator.StringToHash("punch");
+	private int hashPunch;
+	private int hashIdle;
 
 
 	// Use this for initialization
 	void Start () {
 		animator = GetComponent<Animator>();
-		controller = GetComponent<CharacterController>();
+		hashPunch = Animator.StringToHash("punch");
+		hashIdle = Animator.StringToHash("idle");
 
 	}
 
@@ -23,11 +23,14 @@ public class fistPunch : MonoBehaviour {
 	
 	}
 
-	public void OnMouseDown() {
+	public void hitAction() {
+		
 		animator.Play (hashPunch);
 
-		clicked = !clicked;
+
+	}
 
 
-	}*/
+
+
 }
