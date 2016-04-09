@@ -4,9 +4,10 @@ using System.Collections.Generic;
 
 
 public sealed class Inventory : MonoBehaviour {
+	public List<Item> inventory;
+
 	private int nMaxSpace;
 	private int nCount;
-	private List<Item> inventory;
 
 	private static Inventory instance = null;
 	private static readonly object padlock = new object();
