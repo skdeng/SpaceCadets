@@ -12,6 +12,7 @@ public class FirstPersonController : MonoBehaviour {
 	public float fMouseSensitivity = 5.0f;
 	public float fJumpSpeed = 5.0f;
 
+	public GameObject[] aItems;
 	private float pitchRange = 60.0f;
 	private float pitchRotation = 0;
 	private float vertVelocity = 0;
@@ -19,14 +20,14 @@ public class FirstPersonController : MonoBehaviour {
 	private float forwardSpeed = 0.0f;
 	CharacterController characterController;
 
-    public Terrain terrain;
+	public Terrain terrain;
 
 
 	// Use this for initialization
 	void Start () {
 		Screen.lockCursor = true;
 		characterController = GetComponent<CharacterController> ();
-        float curheight = transform.position.y;
+		 float curheight = transform.position.y;
         float terheight = terrain.SampleHeight(transform.position);
         transform.Translate(new Vector3(0, terheight - curheight, 0));
 	}
