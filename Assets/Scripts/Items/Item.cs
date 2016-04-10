@@ -9,8 +9,19 @@ public abstract class Item : MonoBehaviour {
 	protected int weight;
 	protected string name;
 	protected GUISkin itemImage; //TODO do we need a 2d for inventory & a 3D for world play"?
+	protected GameObject aPrefab;
+	protected int randRange = 11;
 
 	//public abstract bool use (); //TODO maybe a void? not sure bout dis yet
+	public GameObject dropPrefab(){
+		if (aPrefab != null) {
+			if (Random.Range (1, randRange)<= 2) {
+				return aPrefab;
+			}
+		}
+
+		return aPrefab;
+	}
 
 	public int getWeight(){
 		if (weight <= 0) {

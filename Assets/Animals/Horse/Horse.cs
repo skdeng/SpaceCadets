@@ -10,6 +10,8 @@ public class Horse : Animal {
 	void Start () {
 		//for change of state for animations
 		anim = GetComponent<Animator> ();
+		animalItem = GetComponentInParent<HorseMeatItem>();
+
 		startMethod ();
 
 		terrain = GameObject.FindGameObjectWithTag ("Terrain").GetComponent<UnityEngine.Terrain>();

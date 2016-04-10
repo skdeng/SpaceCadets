@@ -4,7 +4,8 @@ using System.Collections;
 public class HasHealth : MonoBehaviour {
 
 	protected float fHP = 100f;
-	public GameObject aPickup;
+
+
 	public void ReceiveDamage( float pAmount ){
 		fHP -= pAmount;
 		if (fHP <= 0) {
@@ -24,11 +25,15 @@ public class HasHealth : MonoBehaviour {
 
 	void Die() 
 	{
+		GameObject aPickup;
+
+		aPickup = GetComponentInParent<Animal> ().dropItem ();
+
 		if (aPickup != null) {
-			if (Random.Range (1, 11)<= 2) {
-				Instantiate(aPickup, transform.position, Quaternion.identity); 
-			}
+			Instantiate (aPickup, transform.position, Quaternion.identity);
+		}
+
 		GetComponentInParent<Animal> ().die();
-	}
+	
 	}
 }

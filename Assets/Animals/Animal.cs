@@ -11,6 +11,8 @@ public abstract class Animal : Lifeform {
 	public float strength;
 
 	protected Animator anim;
+	protected Item animalItem;
+	protected GameObject aPickup; //prefab item that it drops
 
     protected float fIdletime = 3;
     protected float fWalkingTime = 2;
@@ -24,12 +26,20 @@ public abstract class Animal : Lifeform {
 	public abstract void hit(/*Player here*/);
 	public abstract void die ();
 
+
+	public GameObject dropItem (){
+		return animalItem.dropPrefab ();
+	}
+
     protected Terrain terrain;
 
     protected Animal() {
         System.Random r = new System.Random();
         fIdletime = ((float)r.NextDouble() + 1) * 3;
         fWalkingTime = ((float)r.NextDouble() + 1) * 3;
+
+
+			
     }
 
 	//common to animals
