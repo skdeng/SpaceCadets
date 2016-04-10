@@ -4,6 +4,7 @@ using System.Collections;
 public class HasHealth : MonoBehaviour {
 
 	protected float fHP = 100f;
+	public GameObject aPickup;
 
 	public void ReceiveDamage( float pAmount )
 	{
@@ -25,6 +26,11 @@ public class HasHealth : MonoBehaviour {
 
 	void Die() 
 	{
+		if (aPickup != null) {
+			if (Random.Range (1, 11)<= 2) {
+				Instantiate(aPickup, transform.position, Quaternion.identity); 
+			}
+		} 
 		Destroy(gameObject);
 	}
 }

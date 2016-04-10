@@ -15,10 +15,12 @@ public class FirstPersonGrab : MonoBehaviour {
 		Ray ray = new Ray (Camera.main.transform.position, Camera.main.transform.forward);
 		RaycastHit hitInfo;
 
-		if (Physics.Raycast (ray, out hitInfo, 100.0f)) {			
-			if (hitInfo.transform.gameObject.tag == "Item") {
-				Inventory aInventory = hitInfo.transform.gameObject.GetComponent<Inventory>();
-				aInventory.add (hitInfo.transform.gameObject.GetComponent<Item>() );
+		if(Input.GetButtonDown("Grab")){
+			if (Physics.Raycast (ray, out hitInfo, 100.0f)) {			
+				if (hitInfo.transform.gameObject.tag == "Item") {
+					Inventory aInventory = hitInfo.transform.gameObject.GetComponent<Inventory>();
+					aInventory.add (hitInfo.transform.gameObject.GetComponent<Item>() );
+				}
 			}
 		}
 	}

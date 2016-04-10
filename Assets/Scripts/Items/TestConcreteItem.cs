@@ -13,7 +13,7 @@ public class TestConcreteItem : Item {
 	
 	}
 
-	public override bool use(){
-		return true;
-	}
+//	public override bool use(){
+//		return true;
+//	}
 }

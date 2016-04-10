@@ -10,7 +10,7 @@ public abstract class Item : MonoBehaviour {
 	protected string name;
 	protected GUISkin itemImage; //TODO do we need a 2d for inventory & a 3D for world play"?
 
-	public abstract bool use (); //TODO maybe a void? not sure bout dis yet
+	//public abstract bool use (); //TODO maybe a void? not sure bout dis yet
 
 	public int getWeight(){
 		if (weight <= 0) {

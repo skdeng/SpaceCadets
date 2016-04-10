@@ -31,9 +31,8 @@ public class Detonation : MonoBehaviour {
 		Destroy (gameObject);
 		if (target.tag == "Enemy") 
 		{
-            //	HasHealth aHealth = target.GetComponent<HasHealth>();
-            //	aHealth.ReceiveDamage (fDamage);
-            Destroy(target);
+            HasHealth aHealth = target.GetComponent<HasHealth>();
+            aHealth.ReceiveDamage (fDamage);
 		}	
 	}
 		
