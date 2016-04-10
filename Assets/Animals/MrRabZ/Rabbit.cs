@@ -3,14 +3,18 @@ using System.Collections;
 
 public class Rabbit : Animal {
 
-    Animator anim;
-
     // Use this for initialization
     void Start() {
         //for change of state for animations
         anim = GetComponent<Animator>();
+		maxHealth = 56;
+		curHealth = maxHealth;
         fLasttime = Time.time;
     }
+
+	public override void die(){
+		Destroy (gameObject);
+	}
 
     void Update() {
         startWalking(anim);

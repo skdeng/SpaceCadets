@@ -20,6 +20,9 @@ public abstract class Animal : Lifeform {
     protected bool bMoving = false;
     protected Vector3 moveVector;
 
+	public abstract void move ();
+	public abstract void hit(/*Player here*/);
+	public abstract void die ();
 
     protected Terrain terrain;
 
@@ -30,8 +33,7 @@ public abstract class Animal : Lifeform {
     }
 
 	//common to animals
-	public abstract void move ();
-	public abstract void hit(/*Player here*/);
+
 
     //returns a random move vector
     //return: a random unit vector on the x-z plane

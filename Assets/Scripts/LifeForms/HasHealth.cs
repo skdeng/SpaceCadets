@@ -5,9 +5,7 @@ public class HasHealth : MonoBehaviour {
 
 	protected float fHP = 100f;
 	public GameObject aPickup;
-
-	public void ReceiveDamage( float pAmount )
-	{
+	public void ReceiveDamage( float pAmount ){
 		fHP -= pAmount;
 		if (fHP <= 0) {
 			Die ();
@@ -30,7 +28,7 @@ public class HasHealth : MonoBehaviour {
 			if (Random.Range (1, 11)<= 2) {
 				Instantiate(aPickup, transform.position, Quaternion.identity); 
 			}
-		} 
-		Destroy(gameObject);
+		GetComponentInParent<Animal> ().die();
+	}
 	}
 }

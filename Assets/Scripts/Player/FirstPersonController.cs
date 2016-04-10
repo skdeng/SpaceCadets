@@ -27,6 +27,7 @@ public class FirstPersonController : MonoBehaviour {
 	void Start () {
 		terrain = GameObject.FindGameObjectWithTag ("Terrain").GetComponent<Terrain>();
 
+
 		Screen.lockCursor = true;
 		characterController = GetComponent<CharacterController> ();
 		 float curheight = transform.position.y;

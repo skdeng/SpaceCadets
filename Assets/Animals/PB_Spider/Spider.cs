@@ -7,7 +7,7 @@ public class Spider : Animal {
     int idle = Animator.StringToHash("endidle");
     int walk = Animator.StringToHash("walk");
 	// Use this for initialization
-	int die = Animator.StringToHash("dead");
+	int die1 = Animator.StringToHash("dead");
 
 	void Start () {
 		startMethod ();
@@ -51,5 +51,8 @@ public class Spider : Animal {
 	}
 
 	override public void hit(){
+	}
+
+	override public void die(){
 	}
 }

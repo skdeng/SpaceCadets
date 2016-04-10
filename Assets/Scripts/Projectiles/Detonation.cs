@@ -3,14 +3,17 @@ using System.Collections;
 
 public class Detonation : MonoBehaviour {
 
-	public float fLifeSpan = 3.0f;
+	public float fLifeSpan;
 	public GameObject gFlare;
+	         
+	FightBehaviour fb;
 
-	private float fDamage = 50f;
+
 
 	// Use this for initialization
 	void Start () {
-	
+		fb = GameObject.FindGameObjectWithTag ("Player").GetComponent<FightBehaviour> ();
+
 	}
 	
 	// Update is called once per frame
@@ -25,14 +28,19 @@ public class Detonation : MonoBehaviour {
 
 	//Called on collision with another rigidbody 
 	void OnCollisionEnter(Collision collision){
-		
+
+		HasHealth aHealth ;
+	
 		GameObject target = collision.gameObject;
+
+
 		Instantiate (gFlare, transform.position, Quaternion.identity);
 		Destroy (gameObject);
 		if (target.tag == "Enemy") 
 		{
-            HasHealth aHealth = target.GetComponent<HasHealth>();
-            aHealth.ReceiveDamage (fDamage);
+            aHealth = target.GetComponent<HasHealth>();
+			aHealth.ReceiveDamage (fb.getWeapon().damage);
+            //Destroy(target);
 		}	
 	}
 		

@@ -7,6 +7,7 @@ public class FirstPersonShooting : Weapon {
 
 	//Our projectile (Defaults to plasma)
 	public GameObject gProjectile1, gProjectile2, gun;
+	private float dmg1 = 10f, dmg2 = 13f;
 	private GameObject gProjectile;
 	public Mesh mesh1, mesh2;
 	private float fProjectileForce = 100f;
@@ -43,6 +44,7 @@ public class FirstPersonShooting : Weapon {
 
 			//Instantiate the projectile and impart force onto it
 			GameObject aProjectile = (GameObject)Instantiate(gProjectile, Weapon.position, gameCamera.transform.rotation);
+			//aProjectile.AddComponent<Detonation> ();
 
 			aProjectile.GetComponent<Rigidbody>().GetComponent<Rigidbody>().AddForce(gameCamera.transform.forward * fProjectileForce, ForceMode.Impulse);
 		}
@@ -60,9 +62,11 @@ public class FirstPersonShooting : Weapon {
 		if (wn == WeaponName.Arch) {
 			tempFilter.mesh = mesh1;
 			gProjectile = gProjectile1;
+			damage = dmg1;
 		} else if (wn == WeaponName.Hell) {
 			tempFilter.mesh = mesh2;
 			gProjectile = gProjectile1;
+			damage = dmg2;
 			//TODO change the projectile
 		}
 	}
