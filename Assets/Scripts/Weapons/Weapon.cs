@@ -4,6 +4,7 @@ using System.Collections;
 public abstract class Weapon : MonoBehaviour {
 
 	public bool enabled;
+	public float damage;
 
 	public enum WeaponName{
 		Fist,

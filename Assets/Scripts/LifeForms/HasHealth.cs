@@ -3,7 +3,7 @@ using System.Collections;
 
 public class HasHealth : MonoBehaviour {
 
-	protected float fHP = 100f;
+	protected float fHP = 56f;
 
 	public void ReceiveDamage( float pAmount )
 	{
@@ -25,6 +25,6 @@ public class HasHealth : MonoBehaviour {
 
 	void Die() 
 	{
-		Destroy(gameObject);
+		GetComponentInParent<Animal> ().die();
 	}
 }
