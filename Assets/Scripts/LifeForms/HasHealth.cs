@@ -4,7 +4,7 @@ using System.Collections;
 public class HasHealth : MonoBehaviour {
 
 	protected float fHP = 100f;
-
+	protected float fRandFactor = 50f;
 
 	public void ReceiveDamage( float pAmount ){
 		fHP -= pAmount;
@@ -29,7 +29,7 @@ public class HasHealth : MonoBehaviour {
 
 		aPickup = GetComponentInParent<Animal> ().dropItem ();
 
-		if (aPickup != null) {
+		if (aPickup != null && Random.Range(0,100) > fRandFactor) {
 			Instantiate (aPickup, transform.position, Quaternion.identity);
 		}
 

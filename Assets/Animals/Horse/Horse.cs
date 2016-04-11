@@ -41,8 +41,7 @@ public class Horse : Animal {
 			goForward();
 			if (Time.time - fLasttime > fWalkingTime) {
 				anim.SetBool("IsWalking", false);
-				while (!(Time.time - fLasttime > fWalkingTime + 1f)) {
-				}
+
 				stopWalking(anim);
 			}
 		}
@@ -60,5 +59,6 @@ public class Horse : Animal {
 	}
 
 	public override void die(){
+		Destroy (gameObject);
 	}
 }
