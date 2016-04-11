@@ -8,27 +8,34 @@ public class UIManager : MonoBehaviour {
 
     public MusicManager musicManager;
 
-    //pause menu options
-    private Button resumeButton;
-    private Slider musicSlider;
-    private Toggle musicToggle;
+    public GameObject player;
+    public Canvas ingameCanvas;
+    public Animal horse, spider;
 
+    GameObject pauseGUI;
+    GameObject pauseMenu;
+    InstantGuiButton continueButton;
+   
 	// Use this for initialization
 	void Start () {
-        resumeButton = GameObject.Find("resumeButton").GetComponent<Button>();
-        musicSlider = GameObject.Find("musicSlider").GetComponent<Slider>();
-        musicToggle = GameObject.Find("musicToggle").GetComponent<Toggle>();
+        player = GameObject.Find("Player");
+        ingameCanvas = GameObject.Find("IngameCanvas").GetComponentInChildren<Canvas>();
+        horse = GameObject.Find("Animals").GetComponentInChildren<Horse>();
+        spider = GameObject.Find("Animals").GetComponentInChildren<Spider>();
 
-        resumeButton.onClick.AddListener(delegate { togglePause(); });
-        musicSlider.onValueChanged.AddListener(delegate { changeVolume(); });
-        musicToggle.onValueChanged.AddListener(delegate { toggleMusic(); });
-        
-	}
+        pauseGUI = GameObject.Find("PauseGUI");
+        pauseMenu = GameObject.Find("Pause Menu");
+        continueButton = GameObject.Find("Continue").GetComponent<InstantGuiButton>();
+        pauseMenu.SetActive(false);
+        pauseGUI.SetActive(false);
+    }
 	
 	// Update is called once per frame
 	void Update () {
-	  
-	}
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            togglePause();
+        }
+    }
 
     public void togglePause() {
         if (Cursor.lockState == CursorLockMode.Locked) {
@@ -44,22 +51,17 @@ public class UIManager : MonoBehaviour {
 
         musicManager.pause(bPaused);
 
-        GameObject.Find("Player").GetComponent<FirstPersonController>().enabled = !bPaused;
-        GameObject.Find("Player").GetComponent<FirstPersonShooting>().enabled = !bPaused;
-        //gameObject.GetComponent<FirstPersonAttack>().enabled = !bPaused;
+        player.GetComponent<FirstPersonController>().enabled = !bPaused;
+        player.GetComponent<FirstPersonShooting>().enabled = !bPaused;
+        //player.GetComponent<FirstPersonAttack>().enabled = !bPaused;
+        
+        ingameCanvas.enabled = !bPaused;
+        pauseGUI.SetActive(bPaused);
+        pauseMenu.SetActive(bPaused);
+        continueButton.pressed = false;
+        continueButton.check = false;
 
-        GameObject.Find("PauseCanvas").GetComponentInChildren<Canvas>().enabled = bPaused;
-        GameObject.Find("IngameCanvas").GetComponentInChildren<Canvas>().enabled = !bPaused;
-
-        GameObject.Find("Animals").GetComponentInChildren<Horse>().enabled = !bPaused;
-        GameObject.Find("Animals").GetComponentInChildren<Spider>().enabled = !bPaused;
-    }
-
-    public void changeVolume() {
-        musicManager.setVolume(musicSlider.value);
-    }
-
-    public void toggleMusic() {
-        musicManager.pause(!musicToggle.isOn);
+        horse.enabled = !bPaused;
+        spider.enabled = !bPaused;
     }
 }
