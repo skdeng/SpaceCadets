@@ -4,9 +4,13 @@ using System.Collections;
 public class HasHealth : MonoBehaviour {
 
 	protected float fHP = 100f;
+	protected float fRandFactor = 0f;
 
-	public void ReceiveDamage( float pAmount )
-	{
+	public void setHealth(float newHealth){
+		fHP = newHealth;
+	}
+
+	public void ReceiveDamage( float pAmount ){
 		fHP -= pAmount;
 		if (fHP <= 0) {
 			Die ();
@@ -25,6 +29,14 @@ public class HasHealth : MonoBehaviour {
 
 	void Die() 
 	{
-		Destroy(gameObject);
+		GameObject aPickup;
+
+		aPickup = GetComponentInParent<Interactable> ().dropItem ();
+
+		if (aPickup != null && Random.Range(0,100) > fRandFactor) {
+			Instantiate (aPickup, transform.position, Quaternion.identity);
+		}
+
+		GetComponentInParent<Interactable> ().die();
 	}
 }

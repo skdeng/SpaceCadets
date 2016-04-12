@@ -9,25 +9,30 @@ public class UIManager : MonoBehaviour {
     public MusicManager musicManager;
 
     public GameObject player;
-    public Canvas ingameCanvas;
+    public GameObject crosshair;
+    public GameObject minimap;
     public Animal horse, spider;
 
     GameObject pauseGUI;
     GameObject pauseMenu;
+    Transform inventoryGUI;
     InstantGuiButton continueButton;
    
 	// Use this for initialization
 	void Start () {
         player = GameObject.Find("Player");
-        ingameCanvas = GameObject.Find("IngameCanvas").GetComponentInChildren<Canvas>();
-        horse = GameObject.Find("Animals").GetComponentInChildren<Horse>();
-        spider = GameObject.Find("Animals").GetComponentInChildren<Spider>();
+        crosshair = GameObject.Find("crosshair");
+        minimap = GameObject.Find("minimap");
+        //horse = GameObject.Find("Animals").GetComponentInChildren<Horse>();
+        //spider = GameObject.Find("Animals").GetComponentInChildren<Spider>();
 
         pauseGUI = GameObject.Find("PauseGUI");
         pauseMenu = GameObject.Find("Pause Menu");
         continueButton = GameObject.Find("Continue").GetComponent<InstantGuiButton>();
         pauseMenu.SetActive(false);
         pauseGUI.SetActive(false);
+
+        inventoryGUI = pauseGUI.transform.FindChild("Inventory");
     }
 	
 	// Update is called once per frame
@@ -55,13 +60,24 @@ public class UIManager : MonoBehaviour {
         player.GetComponent<FirstPersonShooting>().enabled = !bPaused;
         //player.GetComponent<FirstPersonAttack>().enabled = !bPaused;
         
-        ingameCanvas.enabled = !bPaused;
+        crosshair.SetActive(!bPaused);
+        minimap.SetActive(!bPaused);
         pauseGUI.SetActive(bPaused);
         pauseMenu.SetActive(bPaused);
         continueButton.pressed = false;
         continueButton.check = false;
 
-        horse.enabled = !bPaused;
-        spider.enabled = !bPaused;
+        //horse.enabled = !bPaused;
+        //spider.enabled = !bPaused;
     }
+
+    //public void addItem(int slotid, int itemid) {
+    //    inventoryGUI.FindChild(slotid.ToString()).FindChild("content").GetComponent<InstantGuiElement>().mainGuiTexture.texture = null;
+    //    inventoryGUI.FindChild(slotid.ToString()).FindChild("content").GetComponent<InstantGuiElement>().mainGuiTexture.texture = Resources.Load("items/item" + itemid) as Texture2D;
+    //}
+
+    public void removeItem(int slotid) {
+        inventoryGUI.FindChild(slotid.ToString()).FindChild("content").GetComponent<InstantGuiElement>().mainGuiTexture = null;
+    }
+
 }
