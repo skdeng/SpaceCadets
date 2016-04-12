@@ -11,28 +11,64 @@ public class MapGeneration : MonoBehaviour{
 	private GUIStyle currentStyle = null;
 
 	void OnGUI(){
+
 			Color[] pix = new Color[200 * 200];
-			//Color all pixels green	
+			Color grassCol = new Color( 0f, 200f, 0f, 0.2f);
+			Color enemyCol = new Color( 200f, 0f, 0f, 0.5f);
+			Color playerCol = new Color (0f, 0f, 200f, 0.5f);
+			Color shipCol = new Color (160f, 0f, 160f, 0.5f);
+			Color forwardCol = new Color (255f, 255f, 0f, 0.5f);	
+
+
+			GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+			int playerx =(int)(players[0].transform.position.x);
+			int playerz = (int)(players[0].transform.position.z);
+			Vector3 rotation = players[0].transform.forward;
+			//Debug.Log (rotation.ToString());
+			
 			for( int i = 0; i < pix.Length; i++ )
 			{
-				pix[i] = new Color( 0f, 200f, 0f, 0.5f);	
+				pix[i] = grassCol; 	
 			}
+
+			rotation = Quaternion.Euler (0, -15, 0) * rotation;
+			
+			for (int i = 0; i<30; i++) {
+				drawForward (pix, rotation, forwardCol);
+				rotation = Quaternion.Euler (0, 1, 0) * rotation;
+			}	
 
 			//Color all the positions of enemy red
 			GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 			foreach (GameObject enemy in enemies) {
-				int enemyx = (int)(enemy.transform.position.x+500)/5;
-				int enemyz = (int)(enemy.transform.position.z+500)/5;
-			//	Debug.Log ("x: "+enemyx+"  z: "+enemyz);
-				pix[enemyz*200 + enemyx -200] = new Color( 200f, 0f, 0f, 0.5f);
+				int enemyx = (int)(enemy.transform.position.x);
+				int enemyz = (int)(enemy.transform.position.z);
+				if(enemyx > playerx - 95 && enemyx < playerx + 95 && enemyz > playerz - 95 && enemyz < playerz + 95)
+				{
+				enemyx = enemyx - playerx + 100;
+				enemyz = enemyz - playerz + 100;
+				//Debug.Log (enemyx +", "+enemyz);
+				colorShape(pix, enemyx,enemyz, enemyCol,"diamond");
+				}
+			}
+			
+			int shipx = 0;
+			int shipz = 0;
+			if(shipx > playerx - 95 && shipx < playerx + 95 && shipz > playerz - 95 && shipz < playerz + 95)
+			{
+				shipx = shipx - playerx + 100;
+				shipz = shipz - playerz + 100;
+				//Debug.Log (enemyx +", "+enemyz);
+				colorShape(pix, shipx,shipz, shipCol,"ship");
 			}
 
-			//create a cross for the main player
-			GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-			int playerx = (int)(players[0].transform.position.x + 500) / 5;
-			int playerz = (int)(players[0].transform.position.z + 500) / 5;
 			
-			colorPlayer(pix, playerx, playerz);
+			//create a cross for the main player
+			
+			colorShape(pix, 100, 100, playerCol,"square");
+			//Debug.Log ((100 + (int)(rotation.x * 10)) + ", " + (100 + (int)(rotation.z * 10)));
+			
+			
 			
 		 	// apply pix to create a texture
 			Texture2D result = new Texture2D( 200, 200 );
@@ -42,20 +78,60 @@ public class MapGeneration : MonoBehaviour{
 			currentStyle.normal.background = result;
 			
 			//create a box from the pix texture
-			GUI.Box (new Rect (Screen.width - 200,0,200,200), "Map", currentStyle );
+			GUI.Box (new Rect (Screen.width - 200,0,200,200), "", currentStyle );
 
 	
 	}
+	int translatePosition(double position){
+		//converts a map of -500,-500,500,500 to 0,0,200,200
+		return (int)((position + 500) / 5);
+	}
+	void colorShape(Color[] pix, int playerx, int playerz, Color color, string shape){
+		if (shape.Equals ("square")) {
+			pix [getPixIndex (playerz, playerx)] = color;
+			pix [getPixIndex (playerz, playerx) - 1] = color;
+			pix [getPixIndex (playerz, playerx) + 1] = color;
+			pix [getPixIndex (playerz, playerx) - 200] = color;
+			pix [getPixIndex (playerz, playerx) + 200] = color;
+			pix [getPixIndex (playerz, playerx) - 200 - 1] = color;
+			pix [getPixIndex (playerz, playerx) - 200 + 1] = color;
+			pix [getPixIndex (playerz, playerx) + 200 - 1] = color;
+			pix [getPixIndex (playerz, playerx) + 200 + 1] = color;
+		} else if (shape.Equals ("diamond")) {
+			pix [getPixIndex (playerz, playerx)] = color;
+			pix [getPixIndex (playerz, playerx) - 1] = color;
+			pix [getPixIndex (playerz, playerx) + 1] = color;
+			pix [getPixIndex (playerz, playerx) - 200] = color;
+			pix [getPixIndex (playerz, playerx) + 200] = color;
+		} else if (shape.Equals ("ship")) {
+			pix [getPixIndex (playerz, playerx)] = color;
+			pix [getPixIndex (playerz, playerx) - 1] = color;
+			pix [getPixIndex (playerz, playerx) + 1] = color;
+			pix [getPixIndex (playerz, playerx) - 200] = color;
+			pix [getPixIndex (playerz, playerx) + 200] = color;
+			pix [getPixIndex (playerz, playerx) - 200 - 1] = color;
+			pix [getPixIndex (playerz, playerx) - 200 + 1] = color;
+			pix [getPixIndex (playerz, playerx) + 200 - 1] = color;
+			pix [getPixIndex (playerz, playerx) + 200 + 1] = color;
+			pix [getPixIndex (playerz, playerx) - 2] = color;
+			pix [getPixIndex (playerz, playerx) + 2] = color;
+			pix [getPixIndex (playerz, playerx) - 400] = color;
+			pix [getPixIndex (playerz, playerx) + 400] = color;
+		} else if(shape.Equals ("dot")){
+			pix [getPixIndex (playerz, playerx)] = color;
+		}
+	}
+	int getPixIndex(int zposition, int xposition){
+		return zposition * 200 + xposition;
+	}
 
-	void colorPlayer(Color[] pix, int playerx, int playerz){
-		//middle square
-		pix [playerz * 200 + playerx - 200] = new Color (0f, 0f, 200f, 0.5f);
-
-		pix [playerz * 200 + playerx - 200-1] = new Color (0f, 0f, 200f, 0.5f);
-		pix [playerz * 200 + playerx - 200+1] = new Color (0f, 0f, 200f, 0.5f);
-
-		pix [playerz * 200 + playerx - 200-200] = new Color (0f, 0f, 200f, 0.5f);
-		pix [playerz * 200 + playerx - 200+200] = new Color (0f, 0f, 200f, 0.5f);
-
+	void drawForward(Color[] pix, Vector3 rotation, Color col){
+		colorShape(pix, 100 + (int)(rotation.x*7), 100 + (int)(rotation.z*7), col, "dot");
+		colorShape(pix, 100 + (int)(rotation.x*8), 100 + (int)(rotation.z*8), col, "dot");
+		colorShape(pix, 100 + (int)(rotation.x*9), 100 + (int)(rotation.z*9), col, "dot");
+		colorShape(pix, 100 + (int)(rotation.x*10), 100 + (int)(rotation.z*10), col, "dot");
+		colorShape(pix, 100 + (int)(rotation.x*11), 100 + (int)(rotation.z*11), col, "dot");
+		colorShape(pix, 100 + (int)(rotation.x*12), 100 + (int)(rotation.z*12), col, "dot");
+		colorShape(pix, 100 + (int)(rotation.x*13), 100 + (int)(rotation.z*13), col, "dot");
 	}
 }
