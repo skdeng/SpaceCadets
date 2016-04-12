@@ -10,7 +10,6 @@ public class Spider : Animal {
 	int die1 = Animator.StringToHash("dead");
 
 	void Start () {
-		startMethod ();
 		terrain = GameObject.FindGameObjectWithTag ("Terrain").GetComponent<Terrain>();
 
 		float nX = Random.Range (-450, 450);
@@ -50,9 +49,9 @@ public class Spider : Animal {
         anim.SetBool("IsWalking", true);
 	}
 
-	override public void hit(){
+	public override void hit(float damage){
 	}
 
-	override public void die(){
+	public override void die(){
 	}
 }

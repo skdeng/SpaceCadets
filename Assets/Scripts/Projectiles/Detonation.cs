@@ -30,16 +30,17 @@ public class Detonation : MonoBehaviour {
 	void OnCollisionEnter(Collision collision){
 
 		HasHealth aHealth ;
-	
+		Interactable aInteractable;
 		GameObject target = collision.gameObject;
 
 
 		Instantiate (gFlare, transform.position, Quaternion.identity);
 		Destroy (gameObject);
-		if (target.tag == "Enemy") 
+		if (target.tag == "Interactable") 
 		{
-            aHealth = target.GetComponent<HasHealth>();
-			aHealth.ReceiveDamage (fb.getWeapon().damage);
+			aInteractable = target.GetComponent<Interactable> ();
+			aInteractable.hit (fb.getWeapon().damage);
+
             //Destroy(target);
 		}	
 	}

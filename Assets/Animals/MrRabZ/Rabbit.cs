@@ -7,10 +7,15 @@ public class Rabbit : Animal {
     void Start() {
         //for change of state for animations
         anim = GetComponent<Animator>();
-		maxHealth = 56;
-		curHealth = maxHealth;
+		//maxHealth = 56;
+		//curHealth = maxHealth;
         fLasttime = Time.time;
     }
+
+
+	public override void hit(float damage) {
+
+	}
 
 	public override void die(){
 		Destroy (gameObject);
@@ -39,7 +44,4 @@ public class Rabbit : Animal {
         anim.SetFloat("speed", speed);
     }
 
-    override public void hit() {
-
-    }
 }

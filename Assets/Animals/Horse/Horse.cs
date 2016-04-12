@@ -3,16 +3,13 @@ using System.Collections;
 
 public class Horse : Animal {
 
-
-
-
 	// Use this for initialization
 	void Start () {
 		//for change of state for animations
 		anim = GetComponent<Animator> ();
 		animalItem = GetComponentInParent<HorseMeatItem>();
 
-		startMethod ();
+		GetComponentInParent<HasHealth> ().setHealth (fMaxHealth);
 
 		terrain = GameObject.FindGameObjectWithTag ("Terrain").GetComponent<UnityEngine.Terrain>();
 		if (terrain != null) {
@@ -54,8 +51,10 @@ public class Horse : Animal {
         anim.SetBool("IsWalking", true);
 	}
 
-	override public void hit(){
+	public override void hit(float damage){
+		HasHealth aHealth = GetComponentInParent<HasHealth> ();
 
+		aHealth.ReceiveDamage (damage);
 	}
 
 	public override void die(){

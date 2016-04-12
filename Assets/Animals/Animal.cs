@@ -4,15 +4,16 @@ using System.Collections;
 //abstract because there is nothing it can really concretely do, and the functions can't be abstract unless the class is
 //lifeform is also abstract see: Lifeform
 //
-public abstract class Animal : Lifeform {
+public abstract class Animal : MonoBehaviour, Interactable {
 	//public so that it is easily manipulatible with Unity
 	public string behaviour;
 	public float speed = 0.1f;
 	public float strength;
+	public float fMaxHealth = 100f;
 
 	protected Animator anim;
 	protected Item animalItem;
-	protected GameObject aPickup; //prefab item that it drops
+	//protected GameObject aPickup; //prefab item that it drops
 
     protected float fIdletime = 3;
     protected float fWalkingTime = 2;
@@ -22,9 +23,10 @@ public abstract class Animal : Lifeform {
     protected bool bMoving = false;
     protected Vector3 moveVector;
 
+
 	public abstract void move ();
-	public abstract void hit(/*Player here*/);
-	public abstract void die ();
+	//public abstract void hit(/*Player here*/);
+	//public abstract void die ();
 
 
 	public GameObject dropItem (){
@@ -81,7 +83,9 @@ public abstract class Animal : Lifeform {
 	public Animator getAnim(){
 		return anim;
 	}
-    //prepare the animal for idle animation
+    
+
+	//prepare the animal for idle animation
     //param: anim   - animator of the animal
     protected void stopWalking(Animator anim) {
         if (anim.IsInTransition(0)) {
@@ -95,10 +99,10 @@ public abstract class Animal : Lifeform {
 
 	}
 
-	protected void startMethod(){
+	//essentially a super start method to be called in the child
+
+	public abstract void die ();
+	public abstract void hit(float damage);
 
 
-
-
-	}
 }

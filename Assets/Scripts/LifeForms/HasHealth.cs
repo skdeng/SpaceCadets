@@ -6,6 +6,10 @@ public class HasHealth : MonoBehaviour {
 	protected float fHP = 100f;
 	protected float fRandFactor = 50f;
 
+	public void setHealth(float newHealth){
+		fHP = newHealth;
+	}
+
 	public void ReceiveDamage( float pAmount ){
 		fHP -= pAmount;
 		if (fHP <= 0) {
@@ -27,13 +31,13 @@ public class HasHealth : MonoBehaviour {
 	{
 		GameObject aPickup;
 
-		aPickup = GetComponentInParent<Animal> ().dropItem ();
+		aPickup = GetComponentInParent<Interactable> ().dropItem ();
 
 		if (aPickup != null && Random.Range(0,100) > fRandFactor) {
 			Instantiate (aPickup, transform.position, Quaternion.identity);
 		}
 
-		GetComponentInParent<Animal> ().die();
+		GetComponentInParent<Interactable> ().die();
 	
 	}
 }
