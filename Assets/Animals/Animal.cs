@@ -23,6 +23,7 @@ public abstract class Animal : MonoBehaviour, Interactable {
     protected bool bMoving = false;
     protected Vector3 moveVector;
 
+	protected Terrain terrain;
 
 	public abstract void move ();
 	//public abstract void hit(/*Player here*/);
@@ -30,17 +31,19 @@ public abstract class Animal : MonoBehaviour, Interactable {
 
 
 	public GameObject dropItem (){
-		return animalItem.dropPrefab ();
+		if (animalItem != null){
+			return animalItem.dropPrefab ();
+		}
+
+		return null;
 	}
 
-    protected Terrain terrain;
+  
 
     protected Animal() {
         System.Random r = new System.Random();
         fIdletime = ((float)r.NextDouble() + 1) * 3;
         fWalkingTime = ((float)r.NextDouble() + 1) * 3;
-
-
 			
     }
 
@@ -76,7 +79,7 @@ public abstract class Animal : MonoBehaviour, Interactable {
         if (anim.IsInTransition(0) && bStartMoving) {
             bMoving = true;
             bStartMoving = false;
-            transform.rotation = Quaternion.LookRotation(moveVector) * transform.rotation;
+			transform.rotation = Quaternion.LookRotation (moveVector);// * transform.rotation;
         }
     }
 
