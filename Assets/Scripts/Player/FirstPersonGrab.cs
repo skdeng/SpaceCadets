@@ -26,7 +26,8 @@ public class FirstPersonGrab : MonoBehaviour {
 
 				if (hitInfo.transform.gameObject.tag == "Item") {
 					aInventory.Add (hitInfo.transform.gameObject.GetComponent<Item>() );
-					Destroy (hitInfo.transform.gameObject);
+//					Destroy (hitInfo.transform.gameObject);
+					hitInfo.transform.gameObject.SetActive(false);
 				}
 			}
 		}
