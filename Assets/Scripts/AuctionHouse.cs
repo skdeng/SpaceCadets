@@ -10,7 +10,7 @@ public class AuctionHouse : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		
+        return;
 	}
 
 	IEnumerator GetHello(){

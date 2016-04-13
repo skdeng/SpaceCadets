@@ -55,7 +55,7 @@ public abstract class Animal : MonoBehaviour, Interactable {
     //adjust the animal's y-position according the height of the terrain
     protected void goForward() {
         Vector3 pos = transform.position;
-        transform.Translate(new Vector3(0, 0, speed));
+        transform.Translate(new Vector3(0, 0, speed * Time.timeScale));
 
 		transform.position = new Vector3(Mathf.Clamp(transform.position.x, -450, 450), terrain.SampleHeight(transform.position), Mathf.Clamp(transform.position.z, -450, 450));
         
@@ -89,7 +89,6 @@ public abstract class Animal : MonoBehaviour, Interactable {
     }
 
 	protected void updateMethod(){
-
 
 	}
 

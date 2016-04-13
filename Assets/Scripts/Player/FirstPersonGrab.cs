@@ -10,7 +10,6 @@ public class FirstPersonGrab : MonoBehaviour {
 	public List<Item> aInventory;
 	// Use this for initialization
 	void Start () {
-	
 	}
 	
 	// Update is called once per frame
@@ -32,4 +31,5 @@ public class FirstPersonGrab : MonoBehaviour {
 			}
 		}
 	}
+
 }

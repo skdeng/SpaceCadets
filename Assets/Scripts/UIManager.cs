@@ -17,14 +17,16 @@ public class UIManager : MonoBehaviour {
     GameObject pauseMenu;
     Transform inventoryGUI;
     InstantGuiButton continueButton;
+
+    Slider healthSlider;
    
 	// Use this for initialization
 	void Start () {
         player = GameObject.Find("Player");
         crosshair = GameObject.Find("crosshair");
         minimap = GameObject.Find("minimap");
-        //horse = GameObject.Find("Animals").GetComponentInChildren<Horse>();
-        //spider = GameObject.Find("Animals").GetComponentInChildren<Spider>();
+
+        healthSlider = GetComponentInChildren<Slider>();
 
         pauseGUI = GameObject.Find("PauseGUI");
         pauseMenu = GameObject.Find("Pause Menu");
@@ -33,6 +35,11 @@ public class UIManager : MonoBehaviour {
         pauseGUI.SetActive(false);
 
         inventoryGUI = pauseGUI.transform.FindChild("Inventory");
+    }
+
+    public void delayedInit() {
+        horse = GameObject.Find("horses").GetComponentInChildren<Horse>();
+        spider = GameObject.Find("spiders").GetComponentInChildren<Spider>();
     }
 	
 	// Update is called once per frame
@@ -80,4 +87,7 @@ public class UIManager : MonoBehaviour {
         inventoryGUI.FindChild(slotid.ToString()).FindChild("content").GetComponent<InstantGuiElement>().mainGuiTexture = null;
     }
 
+    public void notifyHealthChange(int nHealth) {
+        healthSlider.value = nHealth;
+    }
 }
