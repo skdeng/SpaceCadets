@@ -14,7 +14,8 @@ public class Horse : Animal {
 		terrain = GameObject.Find ("Terrain").GetComponent<Terrain>();
 		if (terrain != null) {	
 			fLasttime = Time.time;
-            transform.position = new Vector3(Random.Range(-450, 450), terrain.SampleHeight(transform.position), Random.Range(-450, 450));
+            Vector3 p = new Vector3(Random.Range(-450, 450), 0, Random.Range(-450, 450));
+            transform.position = new Vector3(p.x, terrain.SampleHeight(p), p.z);
         }
 	}
 

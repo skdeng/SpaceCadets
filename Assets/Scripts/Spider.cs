@@ -10,17 +10,15 @@ public class Spider : Animal {
 	int die1 = Animator.StringToHash("dead");
 
 	void Start () {
-		terrain = GameObject.FindGameObjectWithTag ("Terrain").GetComponent<Terrain>();
+        anim = GetComponent<Animator>();
+        GetComponentInParent<HasHealth>().setHealth(fMaxHealth);
 
-		float nX = Random.Range (-450, 450);
-		float nZ = Random.Range (-450, 450);
-		transform.Translate (new Vector3 (nX, 0, nZ));
-
-		anim = GetComponent<Animator> ();
-		fLasttime = Time.time;
-		float curheight = transform.position.y;
-		float terheight = terrain.SampleHeight (transform.position);
-		transform.Translate (new Vector3 (0, terheight - curheight , 0));
+        terrain = GameObject.Find("Terrain").GetComponent<Terrain>();
+        if (terrain != null) {
+            fLasttime = Time.time;
+            Vector3 p = new Vector3(Random.Range(-450, 450), 0, Random.Range(-450, 450));
+            transform.position = new Vector3(p.x, terrain.SampleHeight(p), p.z);
+        }
 	}
 
 	// Update is called once per frame

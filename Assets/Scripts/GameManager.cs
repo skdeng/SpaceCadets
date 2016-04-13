@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using SimpleJson;
 
 public class GameManager : MonoBehaviour {
 
     TerrainGeneration terrainScript;
     Terrain terrain;
     int nTerrainSeed;
-    int nLifeFormAbundance;
     GameObject animals;
-    GameObject player;
+    public GameObject player;
+    string sUsername;
 
 	// Use this for initialization
 	void Start () {
         animals = GameObject.Find("Animals");
-        player = GameObject.Find("Player");
         startNewGame();
         setupGame();
     }
@@ -36,23 +36,38 @@ public class GameManager : MonoBehaviour {
 
         //activate the animals
         animals.transform.FindChild("horses").gameObject.SetActive(true);
+        animals.transform.FindChild("spiders").gameObject.SetActive(true);
 
         //place the player
-        player.transform.position = new Vector3(shipPosition.x + 10, shipPosition.y, shipPosition.z);
+        player.transform.position = new Vector3(shipPosition.x+20, shipPosition.y, shipPosition.z+20);
+
+        GameObject.Find("UIManager").GetComponent<UIManager>().delayedInit();
     }
 
     public void startNewGame() {
-        nLifeFormAbundance = Random.Range(2, 5);
         nTerrainSeed = 1000000 + Random.Range(100, 100000);
+        player.GetComponent<Player>().setHealth(100);
     }
 
     public void save() {
-        Inventory inventory = player.GetComponent<Inventory>();
-        
+        string url = "http://0.0.0.0:5000/getUserInfo?";
+        if (sUsername == null) {
+            print("Invalid username");
+        }
+        url += "username=" + sUsername;
+        url += "&positionx=" + player.transform.position.x;
+        url += "&positiony=" + player.transform.position.y;
+        url += "&positionz=" + player.transform.position.z;
+        //url += "&health=" + 
     }
 
-    public bool load(string sUsername, string sPassword) {
-
+    public bool load(string sUsername) {
+        //string url = "http://0.0.0.0:5000/getUserInfo?username=sodaman";
+        //WWW request = new WWW(request);
         return true;
+    }
+
+    public void setUsername(string s) {
+        sUsername = s;
     }
 }
