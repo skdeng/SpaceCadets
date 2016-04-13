@@ -39,7 +39,7 @@ public class UIManager : MonoBehaviour {
 
     public void delayedInit() {
         horse = GameObject.Find("horses").GetComponentInChildren<Horse>();
-        spider = GameObject.Find("spiders").GetComponentInChildren<Spider>();
+//        spider = GameObject.Find("spiders").GetComponentInChildren<Spider>();
     }
 	
 	// Update is called once per frame

@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour {
 
         //activate the animals
         animals.transform.FindChild("horses").gameObject.SetActive(true);
-        animals.transform.FindChild("spiders").gameObject.SetActive(true);
+//        animals.transform.FindChild("spiders").gameObject.SetActive(true);
 
         //place the player
         player.transform.position = new Vector3(shipPosition.x+20, shipPosition.y, shipPosition.z+20);
