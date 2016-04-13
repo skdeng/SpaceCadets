@@ -7,9 +7,13 @@ public class GameManager : MonoBehaviour {
     Terrain terrain;
     int nTerrainSeed;
     int nLifeFormAbundance;
+    GameObject animals;
+    GameObject player;
 
 	// Use this for initialization
 	void Start () {
+        animals = GameObject.Find("Animals");
+        player = GameObject.Find("Player");
         startNewGame();
         setupGame();
     }
@@ -29,19 +33,12 @@ public class GameManager : MonoBehaviour {
         terrain = Terrain.activeTerrain;
         Vector3 shipPosition = GameObject.Find("ship").transform.position;
         GameObject.Find("ship").transform.position = new Vector3(shipPosition.x, terrain.SampleHeight(shipPosition) + 10, shipPosition.z);
-        
-        //int nAnimalCount = nLifeFormAbundance * 20;
-        //GameObject horsePrefab = Resources.Load<GameObject>("horse");
-        //GameObject spiderPrefab = Resources.Load<GameObject>("spider");
-        //for (int i = 0; i < nAnimalCount; i++) {
-        //    float nX = Random.Range(-450, 450);
-        //    float nZ = Random.Range(-450, 450);
-        //    Instantiate(horsePrefab, new Vector3(nX, 0, nZ), Quaternion.identity);
 
-        //    nX = Random.Range(-450, 450);
-        //    nZ = Random.Range(-450, 450);
-        //    Instantiate(spiderPrefab, new Vector3(nX, 0, nZ), Quaternion.identity);
-        //}
+        //activate the animals
+        animals.transform.FindChild("horses").gameObject.SetActive(true);
+
+        //place the player
+        player.transform.position = new Vector3(shipPosition.x + 10, shipPosition.y, shipPosition.z);
     }
 
     public void startNewGame() {
@@ -50,7 +47,8 @@ public class GameManager : MonoBehaviour {
     }
 
     public void save() {
-
+        Inventory inventory = player.GetComponent<Inventory>();
+        
     }
 
     public bool load(string sUsername, string sPassword) {
