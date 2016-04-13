@@ -39,13 +39,7 @@ public abstract class Animal : MonoBehaviour, Interactable {
         System.Random r = new System.Random();
         fIdletime = ((float)r.NextDouble() + 1) * 3;
         fWalkingTime = ((float)r.NextDouble() + 1) * 3;
-
-
-			
     }
-
-	//common to animals
-
 
     //returns a random move vector
     //return: a random unit vector on the x-z plane
@@ -63,11 +57,11 @@ public abstract class Animal : MonoBehaviour, Interactable {
         Vector3 pos = transform.position;
         transform.Translate(new Vector3(0, 0, speed));
 
-		transform.position = new Vector3(Mathf.Clamp(transform.position.x, -450, 450), transform.position.y, Mathf.Clamp(transform.position.z, -450, 450));
+		transform.position = new Vector3(Mathf.Clamp(transform.position.x, -450, 450), terrain.SampleHeight(transform.position), Mathf.Clamp(transform.position.z, -450, 450));
         
-        Vector3 pos2 = transform.position;
-        float deltaheight = terrain.SampleHeight(pos2) - terrain.SampleHeight(pos);
-        transform.Translate(new Vector3(0, deltaheight, 0));
+        //Vector3 pos2 = transform.position;
+        //float deltaheight = terrain.SampleHeight(pos2) - terrain.SampleHeight(pos);
+        //transform.Translate(new Vector3(0, deltaheight, 0));
     }
 
     //prepare the animal to start walking animation

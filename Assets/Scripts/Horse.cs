@@ -12,17 +12,10 @@ public class Horse : Animal {
 		GetComponentInParent<HasHealth> ().setHealth (fMaxHealth);
 
 		terrain = GameObject.Find ("Terrain").GetComponent<Terrain>();
-		if (terrain != null) {
-            //float nX = Random.Range (-450, 450);
-            //float nZ = Random.Range (-450, 450);
-            //transform.Translate (new Vector3 (nX, 0, nZ));
-
-	
+		if (terrain != null) {	
 			fLasttime = Time.time;
-			float curheight = transform.position.y;
-			float terheight = terrain.SampleHeight (transform.position);
-			transform.Translate (new Vector3 (0, terheight - curheight, 0));
-		}
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, -450, 450), terrain.SampleHeight(transform.position), Mathf.Clamp(transform.position.z, -450, 450));
+        }
 	}
 
     void Update() {

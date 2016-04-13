@@ -19,16 +19,6 @@ public class TerrainGeneration : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Random.seed = Seed;
-
-		terrain = Terrain.activeTerrain;
-		Width = terrain.terrainData.heightmapWidth;
-		Height = terrain.terrainData.heightmapHeight;
-
-		if (heightMap == null)
-			heightMap = new float[Width * Height];
-        //generate ();
-        //applyHeightMap ();
 	}
 	
 	// Update is called once per frame
@@ -50,8 +40,13 @@ public class TerrainGeneration : MonoBehaviour {
 
 	//generate a new heightmap using diamond square alg.
 	public void generate() {
-		if (heightMap == null)
-			heightMap = new float[Width * Height];
+        Random.seed = Seed;
+        terrain = GetComponent<Terrain>();
+        Width = terrain.terrainData.heightmapWidth;
+        Height = terrain.terrainData.heightmapHeight;
+
+        if (heightMap == null)
+            heightMap = new float[Width * Height];
 
 		//randomize the size of the largest feature
 		int nFeatureSize = (int) Mathf.Pow(2.0f, (float) Random.Range (7, 9));
