@@ -105,6 +105,24 @@ def getAllBids():
   cur.close()
   conn.close()
   return jsonify(output)
+@app.route('/updatePlayer', methods=['GET'])
+def updatePlayer():
+  username = request.args.get('username')
+  positionx = request.args.get('positionx')
+  positiony = request.args.get('positiony')
+  positionz = request.args.get('positionz')
+  health = request.args.get('health')
+  inventory = request.args.get('inventory')
+  connections = connectToDatabase()
+  conn = connections[0]
+  cur = connections[1]
+  try:
+  	print """UPDATE Users SET UserName = '"""+username+"""', PositionX = '"""+positionx+"""', PositionY = '"""+positiony+"""', PositionZ = '"""+positionz+"""', CurrentHealth = """+health+""", InventoryItems = '"""+inventory+"""';"""
+	cur.execute("""UPDATE Users SET UserName = '"""+username+"""', PositionX = '"""+positionx+"""', PositionY = '"""+positiony+"""', PositionZ = '"""+positionz+"""', CurrentHealth = """+health+""", InventoryItems = '"""+inventory+"""';""")
+  	conn.commit()
+  	return 'success'
+  except:
+ 	print "I can't get user info!"
 
 def connectToDatabase():
   username = request.args.get('username')
