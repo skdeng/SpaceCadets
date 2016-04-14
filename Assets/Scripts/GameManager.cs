@@ -30,6 +30,12 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 	}
 
+    void OnLevelWasLoaded(int level) {
+        if (GameObject.Find("UIManager").GetComponent<UIManager>().bPaused) {
+            GameObject.Find("UIManager").GetComponent<UIManager>().togglePause();
+        }
+    }
+
     void setupGame() {
         //generate random terrain
         terrainScript = GameObject.Find("Terrain").GetComponent<TerrainGeneration>();
@@ -98,6 +104,13 @@ public class GameManager : MonoBehaviour {
     public void applyPart() {
         if ((player.transform.position - shipPosition).magnitude < 50) {
             shipScript.applyPart();
+            if (shipScript.getProgress() >= 100) {
+                win();
+            }
         }
+    }
+
+    private void win() {
+        //call the winning screen here
     }
 }

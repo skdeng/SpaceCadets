@@ -29,7 +29,7 @@ public class Plant : MonoBehaviour, Interactable {
     }
 
 	public void Update(){
-		grow ();
+        grow();
 	}
 
 	//called by something executing the strategy

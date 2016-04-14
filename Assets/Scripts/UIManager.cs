@@ -4,7 +4,7 @@ using System.Collections;
 
 public class UIManager : MonoBehaviour {
 
-    private bool bPaused = false;
+    public bool bPaused = false;
 
     public MusicManager musicManager;
     public GameManager gameManager;
@@ -97,5 +97,12 @@ public class UIManager : MonoBehaviour {
 
     public void notifyProgressChange(int nProgress) {
         progressSlider.value = nProgress;
+    }
+
+    public void mainMenu() {
+        togglePause();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Application.LoadLevel("startMenu");
     }
 }
