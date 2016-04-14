@@ -9,14 +9,14 @@ public class Ore : MonoBehaviour, Interactable {
 	void Start () {
 		rockItem = GetComponentInParent<MineralItem>();
 
+        float aScale = Random.Range(0.2f, 0.8f);
+        transform.localScale += new Vector3(aScale, aScale, aScale);
+
 		terrain = GameObject.Find ("Terrain").GetComponent<Terrain>();
 		if (terrain != null) {	
 			Vector3 p = new Vector3(Random.Range(-450, 450), 0, Random.Range(-450, 450));
 			transform.position = new Vector3(p.x, terrain.SampleHeight(p), p.z);
 		}
-
-		float aScale = Random.Range (0.2f, 0.8f);
-		transform.localScale += new Vector3(aScale, aScale, aScale);
 	
 	}
 	

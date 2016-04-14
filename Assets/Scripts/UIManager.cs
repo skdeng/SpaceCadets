@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour {
     private bool bPaused = false;
 
     public MusicManager musicManager;
+    public GameManager gameManager;
 
     public GameObject player;
     public GameObject crosshair;
@@ -19,6 +20,7 @@ public class UIManager : MonoBehaviour {
     InstantGuiButton continueButton;
 
     Slider healthSlider;
+    Slider progressSlider;
    
 	// Use this for initialization
 	void Start () {
@@ -26,7 +28,8 @@ public class UIManager : MonoBehaviour {
         crosshair = GameObject.Find("crosshair");
         minimap = GameObject.Find("minimap");
 
-        healthSlider = GetComponentInChildren<Slider>();
+        healthSlider = GameObject.Find("HealthSlider").gameObject.GetComponent<Slider>();
+        progressSlider = GameObject.Find("progressSlider").GetComponent<Slider>();
 
         pauseGUI = GameObject.Find("PauseGUI");
         pauseMenu = GameObject.Find("Pause Menu");
@@ -76,10 +79,13 @@ public class UIManager : MonoBehaviour {
         //spider.enabled = !bPaused;
     }
 
-    //public void addItem(int slotid, int itemid) {
-    //    inventoryGUI.FindChild(slotid.ToString()).FindChild("content").GetComponent<InstantGuiElement>().mainGuiTexture.texture = null;
-    //    inventoryGUI.FindChild(slotid.ToString()).FindChild("content").GetComponent<InstantGuiElement>().mainGuiTexture.texture = Resources.Load("items/item" + itemid) as Texture2D;
-    //}
+    public void saveGame() {
+        GameObject saveMenu = transform.FindChild("PauseGUI").transform.FindChild("Save Game").gameObject;
+        string sUsername = saveMenu.GetComponentInChildren<InstantGuiInputText>().text;
+        gameManager.setUsername(sUsername);
+        gameManager.save();
+        saveMenu.SetActive(false);
+    }
 
     public void removeItem(int slotid) {
         inventoryGUI.FindChild(slotid.ToString()).FindChild("content").GetComponent<InstantGuiElement>().mainGuiTexture = null;
@@ -87,5 +93,9 @@ public class UIManager : MonoBehaviour {
 
     public void notifyHealthChange(int nHealth) {
         healthSlider.value = nHealth;
+    }
+
+    public void notifyProgressChange(int nProgress) {
+        progressSlider.value = nProgress;
     }
 }
