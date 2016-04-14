@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour {
     public GameObject player;
     public GameObject crosshair;
     public GameObject minimap;
+	public GameObject gameover;
+	public GameObject winscreen;
     public Animal horse, spider;
 
     GameObject pauseGUI;
@@ -28,11 +30,15 @@ public class UIManager : MonoBehaviour {
 
         healthSlider = GetComponentInChildren<Slider>();
 
+		gameover = GameObject.Find ("GameOverScreen");
+		winscreen = GameObject.Find ("Win");
         pauseGUI = GameObject.Find("PauseGUI");
         pauseMenu = GameObject.Find("Pause Menu");
         continueButton = GameObject.Find("Continue").GetComponent<InstantGuiButton>();
         pauseMenu.SetActive(false);
         pauseGUI.SetActive(false);
+		gameover.SetActive (false);
+		winscreen.SetActive (false);
 
         horse = GameObject.Find("horses").GetComponentInChildren<Horse>();
         spider = GameObject.Find("spiders").GetComponentInChildren<Spider>();
@@ -46,6 +52,18 @@ public class UIManager : MonoBehaviour {
             togglePause();
         }
     }
+
+	public void gameOverActivate(){
+		gameover.SetActive (true);
+		minimap.SetActive (false);
+
+	}
+
+	public void winScreenActivate(){
+		winscreen.SetActive (true);
+		minimap.SetActive (false);
+
+	}
 
     public void togglePause() {
         if (Cursor.lockState == CursorLockMode.Locked) {
