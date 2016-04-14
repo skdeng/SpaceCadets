@@ -9,7 +9,7 @@ public abstract class Animal : MonoBehaviour, Interactable {
 	public string behaviour;
 	public float speed = 0.1f;
 	public float strength;
-	public float fMaxHealth = 100f;
+	public float fMaxHealth = 15f;
 
 	protected Animator anim;
 	protected Item animalItem;

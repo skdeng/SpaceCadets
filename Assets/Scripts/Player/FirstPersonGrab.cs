@@ -19,7 +19,7 @@ public class FirstPersonGrab : MonoBehaviour {
 			Ray ray = new Ray (Camera.main.transform.position, Camera.main.transform.forward);
 			RaycastHit hitInfo;
 
-			if (Physics.Raycast (ray, out hitInfo, 100.0f)) {	
+			if (Physics.Raycast (ray, out hitInfo, 10.0f)) {	
 				Vector3 hitPoint = hitInfo.point;
 				//Debug.Log ("Hit Point:" + hitPoint);
 
