@@ -14,7 +14,7 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Time.time - fLasttime > 10) {
+        if (Time.time - fLasttime > 5) {
             setHealth(nHealth - 1);
             fLasttime = Time.time;
         } 

@@ -8,9 +8,10 @@ public abstract class Item : MonoBehaviour {
 
 	protected int weight;
 	protected string name;
-	protected GUISkin itemImage; //TODO do we need a 2d for inventory & a 3D for world play"?
+	protected string image; //TODO do we need a 2d for inventory & a 3D for world play"?
 	protected GameObject aPrefab;
 	protected int randRange = 11;
+	public abstract void consume();
 
 	//public abstract bool use (); //TODO maybe a void? not sure bout dis yet
 	public GameObject dropPrefab(){
@@ -53,20 +54,12 @@ public abstract class Item : MonoBehaviour {
 		return name;
 	}
 
-	protected void setSkin(GUISkin newSkin){
-		if (newSkin == null) {
-			//TODO add some default item skin to this thingy
-		}
-
-		itemImage = newSkin;
+	public void setImage(string path){
+		image = path;
 	}
 
-	public GUISkin getSkin(){
-		if (itemImage == null) {
-			//TODO some default thing here
-		}
-
-		return itemImage;
+	public string getImage(){
+		return image;
 	}
 
 

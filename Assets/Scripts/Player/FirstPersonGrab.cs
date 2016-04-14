@@ -7,9 +7,9 @@ using System.Collections.Generic;
 
 public class FirstPersonGrab : MonoBehaviour {
 
-	public List<Item> aInventory;
 	// Use this for initialization
 	void Start () {
+
 	}
 	
 	// Update is called once per frame
@@ -19,15 +19,15 @@ public class FirstPersonGrab : MonoBehaviour {
 			Ray ray = new Ray (Camera.main.transform.position, Camera.main.transform.forward);
 			RaycastHit hitInfo;
 
-			if (Physics.Raycast (ray, out hitInfo, 100.0f)) {	
+			if (Physics.Raycast (ray, out hitInfo, 10.0f)) {	
 				Vector3 hitPoint = hitInfo.point;
-				Debug.Log ("Hit Point:" + hitPoint);
+				//Debug.Log ("Hit Point:" + hitPoint);
 
 
 				if (hitInfo.transform.gameObject.tag == "Item") {
-					aInventory.Add (hitInfo.transform.gameObject.GetComponent<Item>() );
-//					Destroy (hitInfo.transform.gameObject);
+					GameObject.Find("Inventory").GetComponent<InventoryController>().addItem(hitInfo.transform.gameObject.GetComponent<Item>());
 					hitInfo.transform.gameObject.SetActive(false);
+
 				}
 			}
 		}
