@@ -4,6 +4,7 @@ using System.Collections;
 public class SpaceShip : MonoBehaviour {
 
     private int nProgress;
+    private UIManager uiManager;
 
     SpaceShip() {
         nProgress = 0;
@@ -11,7 +12,7 @@ public class SpaceShip : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	    
+        uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
 	}
 	
 	// Update is called once per frame
@@ -20,7 +21,8 @@ public class SpaceShip : MonoBehaviour {
 	}
 
     public void applyPart() {
-        nProgress++;
+        nProgress += 5;
+        uiManager.notifyProgressChange(nProgress);
     }
 
     public int getProgress() {
