@@ -35,6 +35,7 @@ def getUserInfo():
   table["positionz"] = rows[0][3];
   table["currentHealth"] = rows[0][4];
   table["inventoryItems"] = rows[0][5];
+  table["progress"] = rows[0][6];
   
   cur.close()
   conn.close()
@@ -78,7 +79,32 @@ def addToBid():
  	return "Error inserting value to Bid"
   cur.close()
   conn.close()
+#Get all the auctions
+@app.route('/getAllAuctions', methods=['GET'])
+def getAllAuctions():
+  connections = connectToDatabase()
+  conn = connections[0]
+  cur = connections[1]
+  try:
+	cur.execute("""SELECT * FROM AuctionHouse;""")
+	rows = cur.fetchall()
+  except:
+ 	print "I can't get auction info!"
+  output = {}
+  table = []
+  for num in range (0, len(rows)-1):
+    bid = {}
+    bid["auctionid"] = rows[num][0]
+    bid["sellername"] = rows[num][1]
+    bid["itemid"] = rows[num][3]
+    table.append(bid)
+  output["bids"] = table
+  print len(rows)
 
+  cur.close()
+  conn.close()
+  return jsonify(output)
+@app.route('/updatePlayer', methods=['GET'])
 #Get all the bids of an auction
 @app.route('/getAllBids', methods=['GET'])
 def getAllBids():
@@ -113,13 +139,14 @@ def updatePlayer():
   positionz = request.args.get('positionz')
   health = request.args.get('health')
   inventory = request.args.get('inventory')
+  progress = request.args.get('progess')
   connections = connectToDatabase()
   conn = connections[0]
   cur = connections[1]
   try:
   	print """UPDATE Users SET UserName = '"""+username+"""', PositionX = '"""+positionx+"""', PositionY = '"""+positiony+"""', PositionZ = '"""+positionz+"""', CurrentHealth = """+health+""", InventoryItems = '"""+inventory+"""';"""
-	cur.execute("""UPDATE Users SET UserName = '"""+username+"""', PositionX = '"""+positionx+"""', PositionY = '"""+positiony+"""', PositionZ = '"""+positionz+"""', CurrentHealth = """+health+""", InventoryItems = '"""+inventory+"""';""")
-  	conn.commit()
+	cur.execute("""UPDATE Users SET UserName = '"""+username+"""', PositionX = '"""+positionx+"""', PositionY = '"""+positiony+"""', PositionZ = '"""+positionz+"""', CurrentHealth = """+health+""", InventoryItems = '"""+inventory+"""', Progress ="""+progress+""";""")
+  	conn.commit()          
   	return 'success'
   except:
  	print "I can't get user info!"
