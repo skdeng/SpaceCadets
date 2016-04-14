@@ -7,7 +7,7 @@ public class Ore : MonoBehaviour, Interactable {
 	private Item rockItem;
 	// Use this for initialization
 	void Start () {
-		rockItem = GetComponentInParent<HorseMeatItem>();
+		rockItem = GetComponentInParent<MineralItem>();
 
 		terrain = GameObject.Find ("Terrain").GetComponent<Terrain>();
 		if (terrain != null) {	
