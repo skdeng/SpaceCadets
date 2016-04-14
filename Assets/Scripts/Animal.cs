@@ -30,7 +30,11 @@ public abstract class Animal : MonoBehaviour, Interactable {
 
 
 	public GameObject dropItem (){
-		return animalItem.dropPrefab ();
+		if (animalItem != null){
+			return animalItem.dropPrefab ();
+		}
+
+		return null;
 	}
 
     protected Terrain terrain;

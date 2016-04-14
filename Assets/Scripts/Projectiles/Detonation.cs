@@ -36,7 +36,7 @@ public class Detonation : MonoBehaviour {
 
 		Instantiate (gFlare, transform.position, Quaternion.identity);
 		Destroy (gameObject);
-		if (target.tag == "Interactable") 
+		if (target.tag == "Interactable" || target.tag == "Enemy") 
 		{
 			aInteractable = target.GetComponent<Interactable> ();
 			aInteractable.hit (fb.getWeapon().damage);
