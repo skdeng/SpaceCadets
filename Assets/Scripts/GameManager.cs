@@ -8,19 +8,21 @@ public class GameManager : MonoBehaviour {
     Terrain terrain;
     int nTerrainSeed;
     GameObject animals;
+    GameObject plants;
     public GameObject player;
     string sUsername;
+    Vector3 shipPosition;
 
 	// Use this for initialization
 	void Start () {
         animals = GameObject.Find("Animals");
+        plants = GameObject.Find("Plants");
         startNewGame();
         setupGame();
     }
 	
 	// Update is called once per frame
 	void Update () {
-        
 	}
 
     void setupGame() {
@@ -31,17 +33,19 @@ public class GameManager : MonoBehaviour {
         terrainScript.applyHeightMap();
 
         terrain = Terrain.activeTerrain;
-        Vector3 shipPosition = GameObject.Find("ship").transform.position;
+        shipPosition = GameObject.Find("ship").transform.position;
         GameObject.Find("ship").transform.position = new Vector3(shipPosition.x, terrain.SampleHeight(shipPosition) + 10, shipPosition.z);
 
         //activate the animals
-        animals.transform.FindChild("horses").gameObject.SetActive(true);
-//        animals.transform.FindChild("spiders").gameObject.SetActive(true);
+        //animals.transform.FindChild("horses").gameObject.SetActive(true);
+        //animals.transform.FindChild("spiders").gameObject.SetActive(true);
 
         //place the player
         player.transform.position = new Vector3(shipPosition.x+20, shipPosition.y, shipPosition.z+20);
 
-        GameObject.Find("UIManager").GetComponent<UIManager>().delayedInit();
+        foreach (Transform tree in plants.transform) {
+            tree.GetComponent<Plant>().place();
+        }
     }
 
     public void startNewGame() {
@@ -58,12 +62,13 @@ public class GameManager : MonoBehaviour {
         url += "&positionx=" + player.transform.position.x;
         url += "&positiony=" + player.transform.position.y;
         url += "&positionz=" + player.transform.position.z;
-        //url += "&health=" + 
+        url += "&health=" + player.GetComponent<Player>().getHealth();
     }
 
     public bool load(string sUsername) {
         //string url = "http://0.0.0.0:5000/getUserInfo?username=sodaman";
         //WWW request = new WWW(request);
+        
         return true;
     }
 

@@ -15,7 +15,7 @@ public class FirstPersonGrab : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if(Input.GetButtonDown("Fire")){
+		if(Input.GetKeyDown("f")){
 			Ray ray = new Ray (Camera.main.transform.position, Camera.main.transform.forward);
 			RaycastHit hitInfo;
 

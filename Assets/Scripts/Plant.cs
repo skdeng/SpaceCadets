@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Fauna : MonoBehaviour, Interactable {
+public class Plant : MonoBehaviour, Interactable {
 	//may not be abstract?... we will see in time
 	//protected for private access and inheritance
 	public float fMaxHealth = 20f;
 
 	protected growthFunction growth;
 	protected Vector3 curScale;
+
+    private Terrain terrain;
 
 	public void Start(){
 		HasHealth aHealth = GetComponentInParent<HasHealth> ();
@@ -16,8 +18,15 @@ public class Fauna : MonoBehaviour, Interactable {
 		setGrowth (GetComponentInParent<growthFunction> ());
 
 		curScale = transform.localScale;
-
 	}
+
+    public void place() {
+        terrain = GameObject.Find("Terrain").GetComponent<Terrain>();
+        if (terrain != null) {
+            Vector3 p = new Vector3(Random.Range(-450, 450), 0, Random.Range(-450, 450));
+            transform.position = new Vector3(p.x, terrain.SampleHeight(p), p.z);
+        }
+    }
 
 	public void Update(){
 		grow ();

@@ -34,12 +34,10 @@ public class UIManager : MonoBehaviour {
         pauseMenu.SetActive(false);
         pauseGUI.SetActive(false);
 
-        inventoryGUI = pauseGUI.transform.FindChild("Inventory");
-    }
-
-    public void delayedInit() {
         horse = GameObject.Find("horses").GetComponentInChildren<Horse>();
-//        spider = GameObject.Find("spiders").GetComponentInChildren<Spider>();
+        spider = GameObject.Find("spiders").GetComponentInChildren<Spider>();
+
+        inventoryGUI = pauseGUI.transform.FindChild("Inventory");
     }
 	
 	// Update is called once per frame
