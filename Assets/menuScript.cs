@@ -5,8 +5,9 @@ using System.Collections;
 public class menuScript : MonoBehaviour {
 
 	public string levelToLoad;
-
-
+	public Button loadGame;
+	public Button newGame;
+	public InputField username;
 	// Use this for initialization
 	void Start () {
 	
@@ -14,8 +15,19 @@ public class menuScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown ("space")) {
-			Application.LoadLevel(levelToLoad);
-		}
+//		if (loadGame.onClick() ) {
+//			Application.LoadLevel(levelToLoad);
+//		}
+	}
+	void Awake(){
+		loadGame.onClick.AddListener(loadPreviousGame);
+		newGame.onClick.AddListener(createNewGame);
+	}
+
+	void loadPreviousGame(){
+		Application.LoadLevel(levelToLoad);
+	}
+	void createNewGame(){
+		Application.LoadLevel(levelToLoad);
 	}
 }

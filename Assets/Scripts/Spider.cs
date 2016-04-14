@@ -18,6 +18,8 @@ public class Spider : Animal {
         nMaxHealth = 80;
         nStrength = 20;
 
+        animalItem = GetComponentInParent<HorseMeatItem>();
+
         aPlayer = GameObject.Find("Player");
         anim = GetComponent<Animator>();
         GetComponentInParent<HasHealth>().setHealth(nMaxHealth);

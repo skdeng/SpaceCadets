@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
     public GameObject player;
     string sUsername;
     Vector3 shipPosition;
+    SpaceShip shipScript;
 
     string serverURL;
 
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour {
 	void Start () {
         animals = GameObject.Find("Animals");
         plants = GameObject.Find("Plants");
+        shipScript = GameObject.Find("ship").GetComponent<SpaceShip>();
         startNewGame();
         setupGame();
     }
@@ -79,6 +81,7 @@ public class GameManager : MonoBehaviour {
         }
         url += "&inventory=" + sInventory;
         url += "&progress=" + ship.GetComponent<SpaceShip>().getProgress();
+
     }
 
     public bool load(string sUsername) {
@@ -90,5 +93,11 @@ public class GameManager : MonoBehaviour {
 
     public void setUsername(string s) {
         sUsername = s;
+    }
+
+    public void applyPart() {
+        if ((player.transform.position - shipPosition).magnitude < 50) {
+            shipScript.applyPart();
+        }
     }
 }

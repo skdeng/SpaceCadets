@@ -3,9 +3,21 @@ using System.Collections;
 
 public class MapGeneration : MonoBehaviour{
 	private long frame = 0;
+	Color[] pix;
     GameObject player;
+	Color grassCol;
+	Color enemyCol;
+	Color playerCol;
+	Color shipCol;
+	Color forwardCol;
+	Texture2D result;
 	void Start () {
         player = GameObject.Find("Player");
+		grassCol = new Color( 0f, 200f, 0f, 0.2f);
+		enemyCol = new Color( 200f, 0f, 0f, 0.5f);
+		playerCol = new Color (0f, 0f, 200f, 0.5f);
+		shipCol = new Color (160f, 0f, 160f, 0.5f);
+		forwardCol = new Color (255f, 255f, 0f, 0.5f);	
 	}
 	// Update is called once per frame
 	void Update () {
@@ -14,12 +26,8 @@ public class MapGeneration : MonoBehaviour{
 
 	void OnGUI(){
 
-			Color[] pix = new Color[200 * 200];
-			Color grassCol = new Color( 0f, 200f, 0f, 0.2f);
-			Color enemyCol = new Color( 200f, 0f, 0f, 0.5f);
-			Color playerCol = new Color (0f, 0f, 200f, 0.5f);
-			Color shipCol = new Color (160f, 0f, 160f, 0.5f);
-			Color forwardCol = new Color (255f, 255f, 0f, 0.5f);	
+			pix = new Color[200 * 200];
+			
 
 
             //GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
@@ -75,7 +83,7 @@ public class MapGeneration : MonoBehaviour{
 			
 			
 		 	// apply pix to create a texture
-			Texture2D result = new Texture2D( 200, 200 );
+			result = new Texture2D( 200, 200 );
 			result.SetPixels( pix );
 			result.Apply();
 			currentStyle = new GUIStyle (GUI.skin.box);
