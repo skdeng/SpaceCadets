@@ -91,4 +91,8 @@ public class MeeleWeapon : Weapon {
 	{
 
 	}
+
+    public override int getID() {
+        return 10;
+    }
 }

@@ -102,6 +102,13 @@ public class InventoryController : MonoBehaviour {
 
 	}
 
+    public string getItem(int index) {
+        if (aInventory[index] == null)
+            return "";
+        else
+            return aInventory[index].getID().ToString();
+    }
+
 	public void addItem(Item hit){
 		if (numItems < 9) {
 			numItems++;

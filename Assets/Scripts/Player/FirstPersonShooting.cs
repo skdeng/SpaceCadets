@@ -88,6 +88,10 @@ public class FirstPersonShooting : Weapon {
 
 	}
 
+    public override int getID() {
+        return -1;
+    }
+
 	//TODO chnage weapon, also hitshit which has to be initiatied via fightbehavious. Not this fucker
 
 }

@@ -5,7 +5,6 @@ using System.Collections;
 public abstract class Item : MonoBehaviour {
 
 	//TODO maybe making a struct for the stats will make it easy for passing?
-
 	protected int weight;
 	protected string name;
 	protected string image; //TODO do we need a 2d for inventory & a 3D for world play"?
@@ -62,5 +61,5 @@ public abstract class Item : MonoBehaviour {
 		return image;
 	}
 
-
+    public abstract int getID();
 }

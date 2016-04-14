@@ -8,8 +8,8 @@ public abstract class Animal : MonoBehaviour, Interactable {
 	//public so that it is easily manipulatible with Unity
 	public string behaviour;
 	public float speed = 0.1f;
-	public float strength;
-	public float fMaxHealth = 15f;
+	public int nStrength = 10;
+	public int nMaxHealth = 40;
 
 	protected Animator anim;
 	protected Item animalItem;
@@ -99,7 +99,14 @@ public abstract class Animal : MonoBehaviour, Interactable {
 	//essentially a super start method to be called in the child
 
 	public abstract void die ();
+
 	public abstract void hit(float damage);
 
-
+    public void place() {
+        terrain = GameObject.Find("Terrain").GetComponent<Terrain>();
+        if (terrain != null) {
+            Vector3 p = new Vector3(Random.Range(-450, 450), 0, Random.Range(-450, 450));
+            transform.position = new Vector3(p.x, terrain.SampleHeight(p), p.z);
+        }
+    }
 }

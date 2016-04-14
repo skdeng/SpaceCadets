@@ -19,4 +19,8 @@ public class HorseMeatItem : Item {
 		player.setHealth(player.getHealth() + 20);
 
 	}
+
+    public override int getID() {
+        return 0;
+    }
 }

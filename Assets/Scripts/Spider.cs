@@ -12,10 +12,15 @@ public class Spider : Animal {
 	bool bEnd = false;
 	bool bHitMode = false;
 	float fDist;
+    GameObject aPlayer;
 
 	void Start () {
+        nMaxHealth = 80;
+        nStrength = 20;
+
+        aPlayer = GameObject.Find("Player");
         anim = GetComponent<Animator>();
-        GetComponentInParent<HasHealth>().setHealth(fMaxHealth);
+        GetComponentInParent<HasHealth>().setHealth(nMaxHealth);
 
         terrain = GameObject.Find("Terrain").GetComponent<Terrain>();
         if (terrain != null) {
@@ -42,8 +47,6 @@ public class Spider : Animal {
 				}
 			} else if (bFightMode) {
 				fDist = Vector3.Distance (transform.position, player.transform.position);
-				GameObject aPlayer = GameObject.FindGameObjectWithTag ("Player");
-				//Debug.Log ("antyyysdfhljsdfj'hkjhksdf'jksd'fhsjk");
 				if (fDist < 5) {
 					anim.SetBool ("IsWalking", false);
 					float fX =  player.transform.position.x;
@@ -54,13 +57,12 @@ public class Spider : Animal {
 					moveVector = v;
 					transform.rotation = Quaternion.LookRotation (moveVector) ;
 					if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Idle")) {
-						//player.GetComponent<HasHealth> ().ReceiveDamage (fStrength);
-						//Decrease health opf player
+                        player.GetComponent<Player>().damage(nStrength);    //TODO this is not working
 					}
 
 					anim.SetTrigger ("hit");
 
-					bHitMode = true;
+					bHitMode = true; //??
 				} else {
 					anim.SetBool ("IsWalking", true);
 					startWalking (anim);
@@ -101,7 +103,7 @@ public class Spider : Animal {
 			aHealth.ReceiveDamage (damage);
 
 			bFightMode = true;
-
+            speed = 0.25f;
 			bStartMoving = true;
 			//anim.SetBool("IsWalking", true);
 			startWalking (anim);

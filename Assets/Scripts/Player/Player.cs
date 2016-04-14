@@ -25,6 +25,11 @@ public class Player : MonoBehaviour {
         uiManager.notifyHealthChange(nHealth);
     }
 
+    public void damage(int nDamage) {
+        this.nHealth -= nDamage;
+        uiManager.notifyHealthChange(nHealth);
+    }
+
     public int getHealth() {
         return nHealth;
     }

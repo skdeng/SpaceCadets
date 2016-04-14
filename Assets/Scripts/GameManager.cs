@@ -9,9 +9,12 @@ public class GameManager : MonoBehaviour {
     int nTerrainSeed;
     GameObject animals;
     GameObject plants;
+    GameObject ship;
     public GameObject player;
     string sUsername;
     Vector3 shipPosition;
+
+    string serverURL;
 
 	// Use this for initialization
 	void Start () {
@@ -32,13 +35,18 @@ public class GameManager : MonoBehaviour {
         terrainScript.generate();
         terrainScript.applyHeightMap();
 
+        ship = GameObject.Find("ship");
         terrain = Terrain.activeTerrain;
-        shipPosition = GameObject.Find("ship").transform.position;
-        GameObject.Find("ship").transform.position = new Vector3(shipPosition.x, terrain.SampleHeight(shipPosition) + 10, shipPosition.z);
+        shipPosition = ship.transform.position;
+        ship.transform.position = new Vector3(shipPosition.x, terrain.SampleHeight(shipPosition) + 10, shipPosition.z);
 
         //activate the animals
-        //animals.transform.FindChild("horses").gameObject.SetActive(true);
-        //animals.transform.FindChild("spiders").gameObject.SetActive(true);
+        foreach (Transform horse in animals.transform.FindChild("horses").transform) {
+            horse.GetComponent<Horse>().place();
+        }
+        foreach (Transform spider in animals.transform.FindChild("spiders").transform) {
+            spider.GetComponent<Spider>().place();
+        }
 
         //place the player
         player.transform.position = new Vector3(shipPosition.x+20, shipPosition.y, shipPosition.z+20);
@@ -54,7 +62,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void save() {
-        string url = "http://0.0.0.0:5000/getUserInfo?";
+        string url = "http://0.0.0.0:5000/updatePlayer?";
         if (sUsername == null) {
             print("Invalid username");
         }
@@ -63,12 +71,20 @@ public class GameManager : MonoBehaviour {
         url += "&positiony=" + player.transform.position.y;
         url += "&positionz=" + player.transform.position.z;
         url += "&health=" + player.GetComponent<Player>().getHealth();
+
+        InventoryController inventory = GameObject.Find("IngameCanvas").transform.FindChild("Inventory").GetComponent<InventoryController>();
+        string sInventory = "";
+        for (int i = 0; i < 9; i++) {
+            sInventory += inventory.getItem(i) + ",";
+        }
+        url += "&inventory=" + sInventory;
+        url += "&progress=" + ship.GetComponent<SpaceShip>().getProgress();
     }
 
     public bool load(string sUsername) {
-        //string url = "http://0.0.0.0:5000/getUserInfo?username=sodaman";
-        //WWW request = new WWW(request);
-        
+        string url = "http://0.0.0.0:5000/getUserInfo?username="+sUsername;
+        WWW request = new WWW(url);
+        print(request.ToString());
         return true;
     }
 

@@ -10,8 +10,9 @@ public class Horse : Animal {
 		//for change of state for animations
 		anim = GetComponent<Animator> ();
 		animalItem = GetComponentInParent<HorseMeatItem>();
+        nMaxHealth = 50;
 
-		GetComponentInParent<HasHealth> ().setHealth (fMaxHealth);
+		GetComponentInParent<HasHealth> ().setHealth (nMaxHealth);
 
 		terrain = GameObject.Find ("Terrain").GetComponent<Terrain>();
 		if (terrain != null) {	
