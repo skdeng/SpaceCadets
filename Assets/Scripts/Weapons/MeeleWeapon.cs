@@ -86,4 +86,9 @@ public class MeeleWeapon : Weapon {
 	public Sprite getSprite(){
 		return weaponSprite;
 	}
+
+	public override void consume ()
+	{
+
+	}
 }

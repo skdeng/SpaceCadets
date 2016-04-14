@@ -7,9 +7,9 @@ using System.Collections.Generic;
 
 public class FirstPersonGrab : MonoBehaviour {
 
-	public List<Item> aInventory;
 	// Use this for initialization
 	void Start () {
+
 	}
 	
 	// Update is called once per frame
@@ -25,9 +25,9 @@ public class FirstPersonGrab : MonoBehaviour {
 
 
 				if (hitInfo.transform.gameObject.tag == "Item") {
-					aInventory.Add (hitInfo.transform.gameObject.GetComponent<Item>() );
-//					Destroy (hitInfo.transform.gameObject);
+					GameObject.Find("Inventory").GetComponent<InventoryController>().addItem(hitInfo.transform.gameObject.GetComponent<Item>());
 					hitInfo.transform.gameObject.SetActive(false);
+
 				}
 			}
 		}
