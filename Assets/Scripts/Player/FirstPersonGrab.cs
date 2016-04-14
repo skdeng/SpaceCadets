@@ -21,7 +21,7 @@ public class FirstPersonGrab : MonoBehaviour {
 
 			if (Physics.Raycast (ray, out hitInfo, 100.0f)) {	
 				Vector3 hitPoint = hitInfo.point;
-				Debug.Log ("Hit Point:" + hitPoint);
+				//Debug.Log ("Hit Point:" + hitPoint);
 
 
 				if (hitInfo.transform.gameObject.tag == "Item") {
