@@ -115,6 +115,11 @@ public class InventoryController : MonoBehaviour {
 			int firstEmpty = firstEmptySlot();
 			aInventory[firstEmpty] = hit;
 		}
+		for (int i = 0; i < 9; i++) {
+			if (aInventory [i] != null) {
+				Debug.Log(aInventory[i].getImage());
+			}
+		}
 
 	}
 	int firstEmptySlot(){

@@ -8,7 +8,7 @@ public abstract class Item : MonoBehaviour {
 	protected int weight;
 	protected string name;
 	protected string image; //TODO do we need a 2d for inventory & a 3D for world play"?
-	protected GameObject aPrefab;
+	public GameObject aPrefab;
 	protected int randRange = 11;
 	public abstract void consume();
 
