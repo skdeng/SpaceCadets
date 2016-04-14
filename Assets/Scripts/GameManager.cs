@@ -30,12 +30,6 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 	}
 
-    void OnLevelWasLoaded(int level) {
-        if (GameObject.Find("UIManager").GetComponent<UIManager>().bPaused) {
-            GameObject.Find("UIManager").GetComponent<UIManager>().togglePause();
-        }
-    }
-
     void setupGame() {
         //generate random terrain
         terrainScript = GameObject.Find("Terrain").GetComponent<TerrainGeneration>();
@@ -111,6 +105,6 @@ public class GameManager : MonoBehaviour {
     }
 
     private void win() {
-        //call the winning screen here
+        GameObject.Find("UIManager").GetComponent<UIManager>().winScreenActivate();
     }
 }

@@ -33,7 +33,8 @@ public class Spider : Animal {
 	}
 
 	void Update () {
-		Camera player = Camera.main;
+		Camera playerCamera = Camera.main;
+		GameObject player = GameObject.FindGameObjectWithTag ("Player");
 
 		startWalking(anim);
 		if (!bEnd) {
@@ -48,18 +49,19 @@ public class Spider : Animal {
 					stopWalking (anim);
 				}
 			} else if (bFightMode) {
-				fDist = Vector3.Distance (transform.position, player.transform.position);
+				fDist = Vector3.Distance (transform.position, playerCamera.transform.position);
 				if (fDist < 5) {
 					anim.SetBool ("IsWalking", false);
-					float fX =  player.transform.position.x;
-					float fZ =  player.transform.position.z;
+					float fX =  playerCamera.transform.position.x;
+					float fZ =  playerCamera.transform.position.z;
 					Vector3 v = new Vector3(fX - transform.position.x, 0 , fZ - transform.position.z);
 					//v.Normalize();
 
 					moveVector = v;
 					transform.rotation = Quaternion.LookRotation (moveVector) ;
-					if (anim.GetCurrentAnimatorStateInfo (0).IsName ("Idle")) {
+					if (Time.time - fLasttime > 2.4f) {
                         player.GetComponent<Player>().damage(nStrength);    //TODO this is not working
+						fLasttime = Time.time;
 					}
 
 					anim.SetTrigger ("hit");

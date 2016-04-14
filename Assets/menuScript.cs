@@ -20,6 +20,8 @@ public class menuScript : MonoBehaviour {
 //		}
 	}
 	void Awake(){
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
 		loadGame.onClick.AddListener(loadPreviousGame);
 		newGame.onClick.AddListener(createNewGame);
 	}

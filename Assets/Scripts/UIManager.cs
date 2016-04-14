@@ -12,6 +12,8 @@ public class UIManager : MonoBehaviour {
     public GameObject player;
     public GameObject crosshair;
     public GameObject minimap;
+	public GameObject gameover;
+	public GameObject winscreen;
     public Animal horse, spider;
 
     GameObject pauseGUI;
@@ -21,6 +23,8 @@ public class UIManager : MonoBehaviour {
 
     Slider healthSlider;
     Slider progressSlider;
+
+    bool end = false;
    
 	// Use this for initialization
 	void Start () {
@@ -31,11 +35,15 @@ public class UIManager : MonoBehaviour {
         healthSlider = GameObject.Find("HealthSlider").gameObject.GetComponent<Slider>();
         progressSlider = GameObject.Find("progressSlider").GetComponent<Slider>();
 
+		gameover = GameObject.Find ("GameOverScreen");
+		winscreen = GameObject.Find ("Win");
         pauseGUI = GameObject.Find("PauseGUI");
         pauseMenu = GameObject.Find("Pause Menu");
         continueButton = GameObject.Find("Continue").GetComponent<InstantGuiButton>();
         pauseMenu.SetActive(false);
         pauseGUI.SetActive(false);
+		gameover.SetActive (false);
+		winscreen.SetActive (false);
 
         horse = GameObject.Find("horses").GetComponentInChildren<Horse>();
         spider = GameObject.Find("spiders").GetComponentInChildren<Spider>();
@@ -46,8 +54,31 @@ public class UIManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (Input.GetKeyDown(KeyCode.Escape)) {
+            if (end)
+                finish();
             togglePause();
         }
+    }
+
+    public void finish() {
+        togglePause();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Application.LoadLevel("startMenu");
+    }
+
+	public void gameOverActivate(){
+		gameover.SetActive (true);
+		minimap.SetActive (false);
+        end = true;
+	}
+
+	public void winScreenActivate(){
+		winscreen.SetActive (true);
+		minimap.SetActive (false);
+
+        end = true;
+
     }
 
     public void togglePause() {
