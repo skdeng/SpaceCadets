@@ -17,7 +17,8 @@ public class MapGeneration : MonoBehaviour{
 		enemyCol = new Color( 200f, 0f, 0f, 0.5f);
 		playerCol = new Color (0f, 0f, 200f, 0.5f);
 		shipCol = new Color (160f, 0f, 160f, 0.5f);
-		forwardCol = new Color (255f, 255f, 0f, 0.5f);	
+		forwardCol = new Color (255f, 255f, 0f, 0.5f);
+		pix = new Color[200 * 200];
 	}
 	// Update is called once per frame
 	void Update () {
@@ -26,7 +27,7 @@ public class MapGeneration : MonoBehaviour{
 
 	void OnGUI(){
 
-			pix = new Color[200 * 200];
+			
 			
 
 
