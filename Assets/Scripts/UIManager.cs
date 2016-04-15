@@ -111,11 +111,7 @@ public class UIManager : MonoBehaviour {
     }
 
     public void saveGame() {
-        GameObject saveMenu = transform.FindChild("PauseGUI").transform.FindChild("Save Game").gameObject;
-        string sUsername = saveMenu.GetComponentInChildren<InstantGuiInputText>().text;
-        gameManager.setUsername(sUsername);
         gameManager.save();
-        saveMenu.SetActive(false);
     }
 
     public void removeItem(int slotid) {
