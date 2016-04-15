@@ -31,7 +31,7 @@ public class MeeleWeapon : Weapon {
 		damage = 12f;
 		thisGameObj = GameObject.FindGameObjectWithTag ("MeeleAttack");
 		animator.Play ("fistIdle");
-		Debug.Log ("Hit Pointsadjkffffffffffffffffffffffffffffffffffffffff"	);
+		//Debug.Log ("Hit Pointsadjkffffffffffffffffffffffffffffffffffffffff"	);
 	}
 
 	public override void activate(bool newMode){
@@ -70,9 +70,11 @@ public class MeeleWeapon : Weapon {
 	private void updateWeapon(){
 		if (curWeapon == WeaponName.Fist) {
 			changeSprite (defaultMeele);
+			damage = 12;
 		}
 		else if(curWeapon == WeaponName.Sword){
 			changeSprite (swordMeele);
+			damage = 100;
 		}
 	}
 
