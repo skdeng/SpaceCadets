@@ -12,23 +12,25 @@ public class InventoryController : MonoBehaviour {
 		for (int i = 0; i< aInventory.Length; i++) {
 			aInventory[i] = null;
 		}
+		addItem (GameObject.FindGameObjectWithTag ("Player").GetComponent<FistItem> ());
+		addItem (GameObject.FindGameObjectWithTag ("Player").GetComponent<GunItem> ());
 		//aInventory = GameObject.Find("Player").GetComponent<FirstPersonGrab>().aInventory;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.Alpha1)) {
 			if(aInventory[0]!= null){
 				aInventory[0].consume();
-				aInventory[0] = null;
-				numItems--;
+				//aInventory[0] = null;
+				//numItems--;
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.Alpha2)) {
 			if(aInventory[1]!= null){
 				aInventory[1].consume();
-				aInventory[1] = null;
-				numItems--;
+				//aInventory[1] = null;
+				//numItems--;
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.Alpha3)) {

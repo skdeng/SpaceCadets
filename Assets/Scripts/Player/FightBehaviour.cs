@@ -16,14 +16,14 @@ public class FightBehaviour : MonoBehaviour {
 	private int hashPunch; 
 	// Use this for initialization
 	void Start () {
-		/*mw = GameObject.FindGameObjectWithTag ("MeeleAttack").GetComponent<MeeleWeapon>();
+		mw = GameObject.FindGameObjectWithTag ("MeeleAttack").GetComponent<MeeleWeapon>();
 		curWeapon = mw;
 		mw.enabled = true;
+		changeWeaponType (mw);
 
-*/
 		fps = GameObject.FindGameObjectWithTag ("Player").GetComponent<FirstPersonShooting>();
-		fps.enabled = true;
-		curWeapon = fps;
+		fps.enabled = false;
+		//curWeapon = fps;
 
 	}
 
@@ -35,31 +35,31 @@ public class FightBehaviour : MonoBehaviour {
 		curWeapon.activate(true);
 	}
 
-	/*void OnGUI() {
+	public void changeWeapon(Weapon.WeaponName newWeapon){
 
-		if (Event.current.Equals (Event.KeyboardEvent ("1"))) {
+		if (newWeapon == Weapon.WeaponName.Fist) {
 
 			changeWeaponType (mw);
 			curWeapon.changeWeapon(Weapon.WeaponName.Fist);
 		}
 
-		if (Event.current.Equals (Event.KeyboardEvent ("2"))) {
+		if (newWeapon == Weapon.WeaponName.Sword) {
 			changeWeaponType(mw);
 			curWeapon.changeWeapon (Weapon.WeaponName.Sword);
 		}
 
-		if (Event.current.Equals (Event.KeyboardEvent ("3"))) {
+		if (newWeapon == Weapon.WeaponName.Arch) {
 			changeWeaponType (fps);	
 			curWeapon.changeWeapon (Weapon.WeaponName.Arch);
 		}
-		if (Event.current.Equals (Event.KeyboardEvent ("4"))) {
+		if (newWeapon == Weapon.WeaponName.Hell) {
 			changeWeaponType (fps);	
 			curWeapon.changeWeapon (Weapon.WeaponName.Hell);
 		}
 
 
 	}
-*/
+
 	public Weapon getWeapon(){
 		return curWeapon;
 	}

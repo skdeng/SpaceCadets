@@ -9,9 +9,8 @@ public class MeeleWeapon : Weapon {
 
 	private Sprite weaponSprite, swordMeele, defaultMeele;
 	private int hashAttack = Animator.StringToHash("meeleFight");
-	private double damage;
 	private WeaponName curWeapon;
-	private float hitDelay = 1.0f; //in seconds
+	private float hitDelay = 0.5f; //in seconds
 
 	private GameObject thisGameObj;
 
@@ -23,14 +22,16 @@ public class MeeleWeapon : Weapon {
 	//TODO make a enum or something like that otherwise this won't work well...
 
 	void Start(){
-		//animator = GetComponent<Animator> ();
+		animator = GetComponent<Animator> ();
 		enabled = true;
 		loadSprites();
 		//set the default weapon
 		curWeapon = WeaponName.Fist;
 		updateWeapon ();
-
+		damage = 12f;
 		thisGameObj = GameObject.FindGameObjectWithTag ("MeeleAttack");
+		animator.Play ("fistIdle");
+		Debug.Log ("Hit Pointsadjkffffffffffffffffffffffffffffffffffffffff"	);
 	}
 
 	public override void activate(bool newMode){
@@ -39,6 +40,25 @@ public class MeeleWeapon : Weapon {
 	}
 
 	void Update(){
+		
+		if(Input.GetButtonDown ("Fire")){
+			Ray ray = new Ray (Camera.main.transform.position, Camera.main.transform.forward);
+			RaycastHit hitInfo;
+			hitAction();
+
+			if (Physics.Raycast (ray, out hitInfo, 1.6f)) {	
+				Vector3 hitPoint = hitInfo.point;
+
+				if (hitInfo.transform.gameObject.tag == "Enemy" || hitInfo.transform.gameObject.tag == "Interactable") {
+					Interactable aInteractable;
+					//GameObject.Find("Inventory").GetComponent<InventoryController>().addItem(hitInfo.transform.gameObject.GetComponent<Item>());
+					//hitInfo.transform.gameObject.SetActive(false);
+					//TODO decrease the health of the interactable
+					aInteractable = hitInfo.transform.gameObject.GetComponent<Interactable> ();
+					aInteractable.hit(damage);
+				}
+			}
+		}
 	}
 
 
@@ -59,6 +79,7 @@ public class MeeleWeapon : Weapon {
 	override public void changeWeapon(WeaponName wn){
 		curWeapon = wn;
 		updateWeapon ();
+		waitActive = false;
 	}
 
 
@@ -72,6 +93,7 @@ public class MeeleWeapon : Weapon {
 		if (!waitActive) {
 			animator.SetTrigger (hashAttack);
 			StartCoroutine(Wait());   
+
 		}
 
 
@@ -92,7 +114,7 @@ public class MeeleWeapon : Weapon {
 
 	}
 
-    public override int getID() {
-        return 10;
-    }
+	public override int getID() {
+		return 10;
+	}
 }
